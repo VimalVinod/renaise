@@ -7,9 +7,9 @@ export default function About() {
         <h2 className={`${styles.sectionTitle} animate-item`}>A Decade of Empowering Innovation</h2>
         <div className={styles.aboutContent}>
           <div className="animate-item">
-            <p>Renaise is Kerala's largest student-led entrepreneurship meetup, bringing together innovators, entrepreneurs, and industry leaders to foster innovation and collaboration.</p>
+            <p>Renaise is Kerala&apos;s largest student-led entrepreneurship meetup, bringing together innovators, entrepreneurs, and industry leaders to foster innovation and collaboration.</p>
             <p>Since its inception, Renaise has been a platform for students to connect with established entrepreneurs, learn from their experiences, and showcase their ideas to potential investors.</p>
-            <p className={styles.quote}>"Turning students into changemakers."</p>
+            <p className={styles.quote}>&quot;Turning students into changemakers.&quot;</p>
           </div>
           <div className="animate-item">
             <h3>Key Milestones</h3>

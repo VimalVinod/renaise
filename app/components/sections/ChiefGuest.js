@@ -8,7 +8,7 @@ export default function ChiefGuest() {
         <h3 className="animate-item">Shri Pinarayi Vijayan</h3>
         <p className="animate-item">Chief Minister, Kerala</p>
         <div className={`${styles.guestQuote} animate-item`}>
-          <p>"The future of Kerala's economy lies in nurturing innovation and entrepreneurship among our youth. Initiatives like Renaise play a crucial role in building an ecosystem that supports young entrepreneurs to thrive."</p>
+          <p>&quot;The future of Kerala&apos;s economy lies in nurturing innovation and entrepreneurship among our youth. Initiatives like Renaise play a crucial role in building an ecosystem that supports young entrepreneurs to thrive.&quot;</p>
         </div>
       </div>
     </section>

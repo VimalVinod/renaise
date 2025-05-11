@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={styles.footerContent}>
         <div className={styles.footerSection}>
           <h3>Renaise 2025</h3>
-          <p>Kerala's largest student-led entrepreneurship meetup organized by IEDC Bootcamp CEC.</p>
+          <p>Kerala&apos;s largest student-led entrepreneurship meetup organized by IEDC Bootcamp CEC.</p>
         </div>
         <div className={styles.footerSection}>
           <h3>Quick Links</h3>
