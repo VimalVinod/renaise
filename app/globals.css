@@ -19,6 +19,16 @@
   --cta-hover-gradient: linear-gradient(90deg, #3B82F6, #8B5CF6);
 }
 
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--gray-alpha-200);
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--jet-black);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
