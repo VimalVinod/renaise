@@ -1,41 +1,35 @@
 "use client";
 
-import styles from "./components/styles/Page.module.css";
-import Animation from "./components/Animation";
+import React, { useState } from 'react';
+import LoadingScreenScene from '@components/LoadingScreenScene/LoadingScreenScene';
+import HeroScene from '@components/HeroScene/HeroScene';
+import styles from "./page.module.css";
 
-// Layout components
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-
-// Section components
-import Hero from "./components/sections/Hero";
-import About from "./components/sections/About";
-import Moments from "./components/sections/Moments";
-import Scope from "./components/sections/Scope";
-import ChiefGuest from "./components/sections/ChiefGuest";
-import Workshops from "./components/sections/Workshops";
-import Sponsorship from "./components/sections/Sponsorship";
-import Tiers from "./components/sections/Tiers";
-import Partners from "./components/sections/Partners";
 
 export default function Home() {
+  const [currentScene, setCurrentScene] = useState(0);
+
+  const handleLoadingComplete = () => {
+    console.log("Loading Scene Complete! Transitioning to Hero Scene...");
+    setCurrentScene(1);
+  };
+
+  const handleHeroComplete = () => {
+    console.log("Hero Scene animations complete!");
+    // Ready for next scene or user interactions
+  };
+
   return (
-    <div className={styles.page}>
-      {/* Animation component to handle all animations */}
-      <Animation />
-      
-      {/* Layout and section components */}
-      <Header />
-      <Hero />
-      <About />
-      <Moments />
-      <Scope />
-      <ChiefGuest />
-      <Workshops />
-      <Sponsorship />
-      <Tiers />
-      <Partners />
-      <Footer />
+    <div className={styles.container}>
+      {currentScene === 0 && (
+        <LoadingScreenScene onAnimationComplete={handleLoadingComplete} />
+      )}
+      {currentScene === 1 && (
+        <HeroScene 
+          isActive={currentScene === 1} 
+          onAnimationComplete={handleHeroComplete} 
+        />
+      )}
     </div>
   );
-}
+};
