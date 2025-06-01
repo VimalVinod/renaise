@@ -1,0 +1,58 @@
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scrollHint:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--color-teal);
+  font-weight: bold;
+  will-change: transform;
+}
+
+.text {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-navy);
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+.scrollHint:hover .arrow {
+  color: var(--color-orange);
+}
+
+.scrollHint:hover .text {
+  opacity: 1;
+  color: var(--color-teal);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scrollHint {
+    bottom: 1.5rem;
+  }
+  
+  .arrow {
+    font-size: 1.5rem;
+  }
+  
+  .text {
+    font-size: 0.75rem;
+  }
+}

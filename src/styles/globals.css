@@ -1,0 +1,89 @@
+/*primary font*/
+@font-face {
+  font-family: "Velourist";
+  src: url("/fonts/Velourist.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*secondary font*/
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ==========================
+   CSS Variables (Colors)
+   ========================== */
+:root {
+  /* Primary Brand Colors */
+  --color-cream: #fbfbdf;
+  --color-red: #7b0d16;
+  --color-orange: #da581e;
+  --color-teal: #019b77;
+  --color-pink: #fe8bc2;
+  --color-navy: #193242;
+
+  /* Text Colors */
+  --text-primary: #1d1d1f;
+  --text-light: #ffffff;
+
+  /* Background Colors */
+  --bg-primary: var(--color-cream);
+  --bg-accent: var(--color-red);
+
+  /* Accent Colors */
+  --accent-primary: var(--color-teal);
+  --accent-secondary: var(--color-pink);
+
+  /* Neutral Colors */
+  --color-neutral: #cccccc;
+
+  /* Shadows */
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  font-family: "Velourist", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--color-orange);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #da581e;
+}
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
