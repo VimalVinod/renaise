@@ -114,9 +114,9 @@ function Hero() {
         });
         logoScrollTl.to(logoRef.current, {
           y: isMobile ? "-=41vh" : "-=35vh",
-          x: "-=40vw",
+          x: isMobile?"-30vw":"-=40vw",
           height: "auto",
-          width: isMobile ? "18%" : "11%",
+          width: isMobile ? "30%" : "11%",
         });
 
         gsap.to(taglineRef.current, {
