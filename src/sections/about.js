@@ -13,7 +13,7 @@ function About({ aboutRef, bannerRef, textContainerRef, secondaryTextRef }) {
         <h1 className={styles.textWords}>Innovation</h1>
       </div>
       <p className={styles.secondaryTextContainer} ref={secondaryTextRef}>
-        Renaise is Kerala's largest student-led entrepreneurship meetup,
+        Renaise is Kerala&apos;s largest student-led entrepreneurship meetup,
         bringing together innovators, entrepreneurs, and industry leaders to
         foster innovation and collaboration. Since its inception, Renaise has
         been a platform for students to connect with established entrepreneurs,
