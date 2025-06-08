@@ -1,39 +1,43 @@
-import React from 'react';
-import styles from '../styles/cheif.module.css';
+import React from "react";
+import styles from "../styles/cheif.module.css";
 
-function Chief() {
+function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSectionRef }) {
   return (
-    <section className={styles.chiefGuestSection} id="chiefGuests">
+    <section className={styles.chiefGuestSection} id="chiefGuests" ref={chiefSectionRef}>
       <div className={styles.chiefGuestContainer}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.titleTop}>In the esteemed</h2>
-          <h2 className={styles.titleBottom}>presence of</h2>
+          <h2 className={styles.titleTop} ref={topTitleRef}>In the esteemed</h2>
+          <h2 className={styles.titleBottom} ref={bottomTitleRef}>presence of</h2>
         </div>
-        
+
         <div className={styles.guestsContainer}>
-          <div className={styles.guest}>
+          <div className={`${styles.guest} ${styles.chief}`} ref={chiefMinisterRef} >
             <div className={styles.imageContainer}>
               <div className={styles.imageWrapper}>
-                <img 
-                  src="/images/pinarayi.jpg" 
-                  alt="Shri Pinarayi Vijayan" 
+                <img
+                  src="/img/hoomans/cheif-minister.png"
+                  alt="Shri Pinarayi Vijayan"
                   className={styles.guestImage}
+                  loading="lazy"
                 />
               </div>
             </div>
             <div className={styles.guestInfo}>
               <h3 className={styles.guestName}>Shri Pinarayi Vijayan</h3>
-              <p className={styles.guestDesignation}>Chief Minister of Kerala</p>
+              <p className={styles.guestDesignation}>
+                Chief Minister of Kerala
+              </p>
             </div>
           </div>
-          
-          <div className={styles.guest}>
+
+          <div className={`${styles.guest} ${styles.ceo}`} ref={ceoRef} id="ceo">
             <div className={styles.imageContainer}>
               <div className={styles.imageWrapper}>
-                <img 
-                  src="/images/anoop.jpg" 
-                  alt="Anoop Ambika" 
+                <img
+                  src="/img/hoomans/ceo-ksum.png"
+                  alt="Anoop Ambika"
                   className={styles.guestImage}
+                  loading="lazy"
                 />
               </div>
             </div>

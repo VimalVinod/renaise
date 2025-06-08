@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "@styles/main.module.css";
 import Hero from "@sections/hero";
-import ScopeOfEvent from "@sections/scope";
+import Chief from "@sections/chiefGuest";
 
 export default function Home() {
   return (

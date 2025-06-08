@@ -10,6 +10,7 @@ import Navbar from "@components/Navbar";
 import MainContent from "@components/MainContent";
 import About from "@sections/about"; // Import the About component
 import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
+import Chief from "@sections/chiefGuest"; // Import the Chief component
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +36,13 @@ function Hero() {
   const scopeSubtitleRef = useRef(null);
   const cardsContainerRef = useRef(null);
   const scopeSectionRef = useRef(null); // This will be passed to ScopeOfEvent for its main container
+
+  // refs for chief guest section
+  const topTitleRef = useRef(null);
+  const bottomTitleRef = useRef(null);
+  const chiefMinisterRef = useRef(null);
+  const ceoRef = useRef(null);
+  const chiefSectionRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -207,18 +215,18 @@ function Hero() {
             opacity: 1,
             duration: 3,
             ease: "power2.out",
-          })
+          },"-=3")
           .to({}, { duration: 3 })
           .to(textContainerRefForAbout.current, {
-            y: isMobile ? "-=60%" : "-=50%",
-            x: isMobile ? "-=12%" : "-=30%",
+            y: isMobile ? "-=100%" : "-=50%",
+            x: isMobile ? "-=6%" : "-=30%",
             fontSize: isMobile ? "1.8rem" : "2rem",
-            justifyContent:"flex-start",
+            justifyContent: "flex-start",
             duration: 3,
             ease: "power2.out",
           })
           .to(secondaryTextRefForAbout.current, {
-            y: isMobile ? "-10vh" : 0,
+            y: isMobile ? "-13vh" : 0,
             x: isMobile ? "-=5%" : "-=30%",
             duration: 3,
             ease: "power2.out",
@@ -263,53 +271,162 @@ function Hero() {
             "-=2"
           )
           .to({}, { duration: 5 })
-          .to(scopeTitleRef.current, {
-            x: 0,
-            opacity: 1,
-            duration: 3,
-            ease: "power2.out",
-          },"-=3")
-          .to(scopeSubtitleRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 3,
-            ease: "power2.out",
-          }, "-=2")
-          .to(scopeSectionRef.current, {
-            zIndex:100,
-            duration: 0,
-          }, "-=2")
-          .to(cardsContainerRef.current, {
-            y: 0,
-            x: 0,
-            opacity: 1,
-            duration: 3,
-            ease: "power2.out",
-          }, "-=2")
+          .to(
+            scopeTitleRef.current,
+            {
+              x: 0,
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=3"
+          )
+          .to(
+            scopeSubtitleRef.current,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=2"
+          )
+          .to(
+            scopeSectionRef.current,
+            {
+              zIndex: 100,
+              duration: 0,
+            },
+            "-=2"
+          )
+          .to(
+            cardsContainerRef.current,
+            {
+              y: 0,
+              x: 0,
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=2"
+          )
           .to({}, { duration: 5 })
           .to(scopeSectionRef.current, {
             zIndex: -1,
             duration: 0,
           })
-          .to(scopeTitleRef.current, {
-            x: "-=50vw",
+          .to(
+            scopeTitleRef.current,
+            {
+              x: "-=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=2"
+          )
+          .to(
+            scopeSubtitleRef.current,
+            {
+              x: "-=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=2"
+          )
+          .to(
+            cardsContainerRef.current,
+            {
+              y: "-=50vh",
+              x: "-=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=2"
+          )
+          .to({}, { duration: 5 })
+          .to(topTitleRef.current, {
+            x: "-10vw",
+            opacity: 1,
+            duration: 3,
+            ease: "power2.out",
+          },"-=3")
+          .to(
+            bottomTitleRef.current,
+            {
+              x: isMobile ? "10vw" : 0,
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=1"
+          )
+          .to(
+            chiefSectionRef.current,
+            {
+              zIndex: 100,
+              duration: 0,
+            },
+            "-=3"
+          )
+          .to(
+            chiefMinisterRef.current,
+            {
+              y: isMobile?"25vh":0,
+              x:isMobile?"-20vw":"-10vw",
+              rotateY:15,
+              opacity: 1,
+              duration: 3,
+              stagger: 0.5,
+              ease: "power2.out",
+            },
+            "-=2"
+          )
+          .to(
+            ceoRef.current,
+            {
+              opacity: 1,
+              y: isMobile?"25vh":0,
+              x:isMobile?"20vw":"10vw",
+              rotateY:-15,
+              duration: 5,
+              stagger: 0.5,
+              ease: "power2.out",
+            },
+            "-=2"
+          ).to({}, { duration: 5 })
+          .to(chiefSectionRef.current, {
+            zIndex: -1,
+            duration: 0,
+          })
+          .to(bottomTitleRef.current, {
+            x: "+=50vw",
             opacity: 0,
             duration: 3,
             ease: "power2.in",
-          }, "-=2")
-          .to(scopeSubtitleRef.current, {
-            x: "-=50vw",
+          })
+          .to(topTitleRef.current, {
+            x: "+=50vw",
             opacity: 0,
             duration: 3,
             ease: "power2.in",
-          }, "-=2")
-          .to(cardsContainerRef.current, {
+          },"-=2")
+          .to(chiefMinisterRef.current, {
             y: "-=50vh",
             x: "-=50vw",
             opacity: 0,
             duration: 3,
             ease: "power2.in",
-          }, "-=2")
+          },"-=3")
+          .to(ceoRef.current, {
+            y: "-=50vh",
+            x: "+=50vw",
+            opacity: 0,
+            duration: 3,
+            ease: "power2.in",
+          },"-=2")
           .to({}, { duration: 35 })
       },
     });
@@ -375,6 +492,13 @@ function Hero() {
           scopeSubtitleRef={scopeSubtitleRef}
           cardsContainerRef={cardsContainerRef}
           scopeSectionRef={scopeSectionRef}
+        />
+        <Chief
+          topTitleRef={topTitleRef}
+          bottomTitleRef={bottomTitleRef}
+          chiefMinisterRef={chiefMinisterRef}
+          ceoRef={ceoRef}
+          chiefSectionRef={chiefSectionRef}
         />
       </section>
     </>
