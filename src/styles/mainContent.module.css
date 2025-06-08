@@ -8,6 +8,7 @@
   max-width: 1200px;
   margin: 0 auto;
   opacity: 0;
+  z-index:10;
 }
 
 .contentGrid {
@@ -22,10 +23,11 @@
 }
 
 .mainHeading {
-  font-family: 'Velourist', sans-serif;
+  font-family: 'Verdana', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
+  font-weight: bold;
   line-height: 1.1;
+  letter-spacing: 0.05em;
   color: var(--text-primary);
   margin-bottom: 1rem;
 }
@@ -59,11 +61,14 @@
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
+  border: 2px solid #dc3545;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 10;
 }
 
 .primaryBtn:hover {
-  background: #c82333;
+  background: transparent;
+  color: #dc3545;
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(220, 53, 69, 0.3);
 }

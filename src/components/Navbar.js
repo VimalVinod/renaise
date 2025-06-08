@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import styles from "@styles/navbar.module.css";
 
 const Navbar = forwardRef(({ logoTextRef, isMobileMenuOpen, toggleMobileMenu, closeMobileMenu }, ref) => {

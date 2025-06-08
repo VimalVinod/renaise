@@ -6,6 +6,7 @@
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/styles/*"],
+      "@sections/*": ["./src/sections/*"],
     }
   }
 }

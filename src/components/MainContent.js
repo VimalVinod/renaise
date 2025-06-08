@@ -15,7 +15,6 @@ const MainContent = forwardRef((props, ref) => {
           <div className={styles.buttonGroup}>
             <button className={styles.primaryBtn}>
               Register Now
-              <span className={styles.arrow}>→</span>
             </button>
             <button className={styles.secondaryBtn}>Sponsor Us</button>
           </div>

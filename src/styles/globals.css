@@ -14,6 +14,27 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Verdana";
+  src: url("/fonts/Verdana.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Verdana";
+  src: url("/fonts/Verdana-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* ==========================
    CSS Variables (Colors)
    ========================== */
@@ -24,7 +45,7 @@
   --color-orange: #da581e;
   --color-teal: #019b77;
   --color-pink: #fe8bc2;
-  --color-navy: #193242;
+  --color-navy: #0f1e2a;
 
   /* Text Colors */
   --text-primary: #1d1d1f;
@@ -58,6 +79,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   scroll-behavior: smooth;
+  position: relative;
 }
 
 img {
