@@ -137,9 +137,11 @@ function Hero() {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top top",
-            end: "bottom top", // 300vh total scroll distance
-            scrub: 3,
+            end: "+=500%", // Increase scroll distance (was bottom top)
+            scrub: 1, // Reduce scrub value for smoother, slower animation (was 3)
             pin: true,
+            anticipatePin: 1, // Helps with performance
+            refreshPriority: -10,
           },
         });
 
