@@ -60,11 +60,21 @@ function Hero() {
   // }, []);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen(prev=>{
+      if (!prev) {
+        // Disable scrolling when the mobile menu is open
+        document.body.style.overflow = "hidden";
+      } else {
+        // Re-enable scrolling when the mobile menu is closed
+        document.body.style.overflow = "auto";
+      }
+      return !prev;
+    });
   };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+    document.body.style.overflow = "auto"; // Re-enable scrolling
   };
 
   useEffect(() => {

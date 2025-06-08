@@ -92,10 +92,6 @@ a {
   text-decoration: none;
 }
 
-body {
-  overflow: hidden;
-}
-
 body::-webkit-scrollbar {
   width: 6px;
 }
@@ -108,4 +104,15 @@ body::-webkit-scrollbar-thumb:hover {
 }
 body::-webkit-scrollbar-track {
   background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    scrollbar-width: none;  
+    -ms-overflow-style: none; 
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
 }

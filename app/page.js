@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Hero />
-      <div className={styles.nextScene}></div>
+      {/* <div className={styles.nextScene}></div> */}
     </div>
   );
 }
