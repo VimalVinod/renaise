@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import styles from "@styles/hero.module.css";
 import aboutStyles from "@styles/about.module.css"; // Kept for selecting .circle elements
 import Sparkie from "@components/sparkie";
@@ -10,7 +11,8 @@ import Navbar from "@components/Navbar";
 import MainContent from "@components/MainContent";
 import About from "@sections/about"; // Import the About component
 import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
-import Chief from "@sections/chiefGuest"; // Import the Chief component
+import Chief from "@sections/chiefGuest"; // Import the Chief component\
+import Sponsor from "@sections/sponsor"; // Import the Sponsor component
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,6 +46,14 @@ function Hero() {
   const ceoRef = useRef(null);
   const chiefSectionRef = useRef(null);
 
+  //refs for sponsor section
+  const sponsorSectionRef = useRef(null);
+  const sponsorTitleRef = useRef(null);
+  const whyHeadingRef = useRef(null);
+  const whyCardsRef = useRef(null);
+  const whatHeadingRef = useRef(null);
+  const whatCardsRef = useRef(null);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -60,7 +70,7 @@ function Hero() {
   // }, []);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev=>{
+    setIsMobileMenuOpen((prev) => {
       if (!prev) {
         // Disable scrolling when the mobile menu is open
         document.body.style.overflow = "hidden";
@@ -76,6 +86,28 @@ function Hero() {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = "auto"; // Re-enable scrolling
   };
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 2.5, // Higher = slower scrolling
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      mouseMultiplier: 0.4, // Reduce mouse wheel speed
+      touchMultiplier: 1.2,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    const anim=requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+      cancelAnimationFrame(anim);
+    }
+  }, []);
 
   useEffect(() => {
     // Clear any existing animations
@@ -137,9 +169,10 @@ function Hero() {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top top",
-            end: "bottom top", // 300vh total scroll distance
-            scrub: 3,
+            end: "bottom -=300vh", // 300vh total scroll distance
+            scrub: 5,
             pin: true,
+            markers: true, // Set to true for debugging
           },
         });
 
@@ -161,7 +194,7 @@ function Hero() {
             taglineRef.current,
             {
               opacity: 0,
-              y: "-=50vh",
+              x: "-=50vh",
               duration: 1,
               ease: "power2.out",
             },
@@ -219,13 +252,17 @@ function Hero() {
             "-=2" // Start this 2 seconds before the end of the previous animation
           )
           .to({}, { duration: 3 })
-          .to(textContainerRefForAbout.current, {
-            y: "-50%",
-            fontSize: isMobile ? "2rem" : "4rem",
-            opacity: 1,
-            duration: 3,
-            ease: "power2.out",
-          },"-=3")
+          .to(
+            textContainerRefForAbout.current,
+            {
+              y: "-50%",
+              fontSize: isMobile ? "2rem" : "4rem",
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=3"
+          )
           .to({}, { duration: 3 })
           .to(textContainerRefForAbout.current, {
             y: isMobile ? "-=100%" : "-=50%",
@@ -357,12 +394,16 @@ function Hero() {
             "-=2"
           )
           .to({}, { duration: 5 })
-          .to(topTitleRef.current, {
-            x: "-10vw",
-            opacity: 1,
-            duration: 3,
-            ease: "power2.out",
-          },"-=3")
+          .to(
+            topTitleRef.current,
+            {
+              x: "-10vw",
+              opacity: 1,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=3"
+          )
           .to(
             bottomTitleRef.current,
             {
@@ -384,9 +425,9 @@ function Hero() {
           .to(
             chiefMinisterRef.current,
             {
-              y: isMobile?"25vh":0,
-              x:isMobile?"-20vw":"-10vw",
-              rotateY:15,
+              y: isMobile ? "25vh" : 0,
+              x: isMobile ? "-25vw" : "-10vw",
+              rotateY: 15,
               opacity: 1,
               duration: 3,
               stagger: 0.5,
@@ -398,15 +439,16 @@ function Hero() {
             ceoRef.current,
             {
               opacity: 1,
-              y: isMobile?"25vh":0,
-              x:isMobile?"20vw":"10vw",
-              rotateY:-15,
+              y: isMobile ? "20vh" : 0,
+              x: isMobile ? "25vw" : "10vw",
+              rotateY: -15,
               duration: 5,
               stagger: 0.5,
               ease: "power2.out",
             },
             "-=2"
-          ).to({}, { duration: 5 })
+          )
+          .to({}, { duration: 5 })
           .to(chiefSectionRef.current, {
             zIndex: -1,
             duration: 0,
@@ -417,27 +459,49 @@ function Hero() {
             duration: 3,
             ease: "power2.in",
           })
-          .to(topTitleRef.current, {
-            x: "+=50vw",
-            opacity: 0,
-            duration: 3,
-            ease: "power2.in",
-          },"-=2")
-          .to(chiefMinisterRef.current, {
-            y: "-=50vh",
-            x: "-=50vw",
-            opacity: 0,
-            duration: 3,
-            ease: "power2.in",
-          },"-=3")
-          .to(ceoRef.current, {
-            y: "-=50vh",
-            x: "+=50vw",
-            opacity: 0,
-            duration: 3,
-            ease: "power2.in",
-          },"-=2")
-          .to({}, { duration: 35 })
+          .to(
+            topTitleRef.current,
+            {
+              x: "+=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=2"
+          )
+          .to(
+            chiefMinisterRef.current,
+            {
+              y: "-=50vh",
+              x: "+=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=3"
+          )
+          .to(
+            ceoRef.current,
+            {
+              y: "+=50vh",
+              x: "-=50vw",
+              opacity: 0,
+              duration: 3,
+              ease: "power2.in",
+            },
+            "-=2"
+          )
+          .to({}, { duration: 5 })
+          // .to(
+          //   sponsorTitleRef.current,
+          //   {
+          //     x: 0,
+          //     opacity: 1,
+          //     duration: 3,
+          //     ease: "power2.out",
+          //   },
+          //   "-=3"
+          // );
       },
     });
 
@@ -510,6 +574,14 @@ function Hero() {
           ceoRef={ceoRef}
           chiefSectionRef={chiefSectionRef}
         />
+        {/* <Sponsor
+          sponsorSectionRef={sponsorSectionRef}
+          sponsorTitleRef={sponsorTitleRef}
+          whyHeadingRef={whyHeadingRef}
+          whyCardsRef={whyCardsRef}
+          whatHeadingRef={whatHeadingRef}
+          whatCardsRef={whatCardsRef}
+        /> */}
       </section>
     </>
   );
