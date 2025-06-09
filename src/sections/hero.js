@@ -89,7 +89,7 @@ function Hero() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 2.5, // Higher = slower scrolling
+      duration: 5, // Higher = slower scrolling
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       mouseMultiplier: 0.4, // Reduce mouse wheel speed
       touchMultiplier: 1.2,
@@ -172,7 +172,7 @@ function Hero() {
             end: "bottom -=300vh", // 300vh total scroll distance
             scrub: 5,
             pin: true,
-            markers: true, // Set to true for debugging
+           // markers: true, // Set to true for debugging
           },
         });
 
@@ -426,7 +426,7 @@ function Hero() {
             chiefMinisterRef.current,
             {
               y: isMobile ? "25vh" : 0,
-              x: isMobile ? "-25vw" : "-10vw",
+              x: isMobile ? "-20vw" : "-10vw",
               rotateY: 15,
               opacity: 1,
               duration: 3,
@@ -440,7 +440,7 @@ function Hero() {
             {
               opacity: 1,
               y: isMobile ? "20vh" : 0,
-              x: isMobile ? "25vw" : "10vw",
+              x: isMobile ? "20vw" : "10vw",
               rotateY: -15,
               duration: 5,
               stagger: 0.5,
