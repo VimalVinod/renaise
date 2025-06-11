@@ -57,6 +57,8 @@ function Hero() {
   const whyCardsRef = useRef(null);
   const whatHeadingRef = useRef(null);
   const whatCardsRef = useRef(null);
+  const partnersHeadingRef = useRef(null);
+  const partnersGridRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -64,20 +66,20 @@ function Hero() {
   function scrollToSection(sectionName) {
     const tl = timelineRef.current;
     if (!tl.labels[sectionName]) {
-    console.warn(`Section '${sectionName}' not found in GSAP labels`);
-    return;
-  }
+      console.warn(`Section '${sectionName}' not found in GSAP labels`);
+      return;
+    }
 
-  const sectionTime = tl.labels[sectionName];
-  const progress = sectionTime / tl.duration();
-  const scrollLength = ScrollTrigger.maxScroll(window);
-  const scrollTo = scrollLength * progress;
+    const sectionTime = tl.labels[sectionName];
+    const progress = sectionTime / tl.duration();
+    const scrollLength = ScrollTrigger.maxScroll(window);
+    const scrollTo = scrollLength * progress;
 
-  gsap.to(window, {
-    scrollTo: { y: scrollTo },
-    duration: 0.5,
-    ease: "power2.out"
-  });
+    gsap.to(window, {
+      scrollTo: { y: scrollTo },
+      duration: 0.5,
+      ease: "power2.out",
+    });
   }
 
   // useEffect(() => {
@@ -192,7 +194,7 @@ function Hero() {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top top",
-            end: "bottom -=300vh", // 300vh total scroll distance
+            end: "bottom -=500vh", // 300vh total scroll distance
             scrub: 5,
             pin: true,
             // markers: true, // Set to true for debugging
@@ -518,17 +520,81 @@ function Hero() {
             },
             "-=2"
           )
-          .to({}, { duration: 5 });
-        // .to(
-        //   sponsorTitleRef.current,
-        //   {
-        //     x: 0,
-        //     opacity: 1,
-        //     duration: 3,
-        //     ease: "power2.out",
-        //   },
-        //   "-=3"
-        // );
+          .to({}, { duration: 5 })
+          // .addLabel("sponsorSection", "+=5") // Add a label for the Sponsor section
+          // .to(sponsorSectionRef.current, {
+          //   zIndex: 100,
+          //   duration: 0,
+          // })
+          // // First: Sponsor title
+          // .to(
+          //   sponsorTitleRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=3"
+          // )
+          // .to({}, { duration: 2 }) // Pause between sections
+
+          // // Second: "Why Sponsor Us?" section
+          // .to(whyHeadingRef.current, {
+          //   opacity: 1,
+          //   x: 0,
+          //   duration: 2,
+          //   ease: "power2.out",
+          // })
+          // .to(
+          //   whyCardsRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // ) // Start cards before heading finishes
+          // .to({}, { duration: 3 }) // Pause to let users read
+
+          // // Third: "What You Get" section
+          // .to(whatHeadingRef.current, {
+          //   opacity: 1,
+          //   x: 0,
+          //   duration: 2,
+          //   ease: "power2.out",
+          // })
+          // .to(
+          //   whatCardsRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // ) // Start cards before heading finishes
+          // .to({}, { duration: 3 }) // Pause to let users read
+
+          // // Fourth: "Our Partners" section
+          // .to(partnersHeadingRef.current, {
+          //   opacity: 1,
+          //   x: 0,
+          //   duration: 2,
+          //   ease: "power2.out",
+          // })
+          // .to(
+          //   partnersGridRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // ) // Start grid before heading finishes
+          // .to({}, { duration: 5 }); // Final pause
       },
     });
 
@@ -593,14 +659,16 @@ function Hero() {
           ceoRef={ceoRef}
           chiefSectionRef={chiefSectionRef}
         />
-        {/* <Sponsor
+        <Sponsor
           sponsorSectionRef={sponsorSectionRef}
           sponsorTitleRef={sponsorTitleRef}
           whyHeadingRef={whyHeadingRef}
           whyCardsRef={whyCardsRef}
           whatHeadingRef={whatHeadingRef}
           whatCardsRef={whatCardsRef}
-        /> */}
+          partnersHeadingRef={partnersHeadingRef}
+          partnersGridRef={partnersGridRef}
+        />
       </section>
     </>
   );

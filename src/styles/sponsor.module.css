@@ -6,7 +6,7 @@
   width: 100%;
   padding: 5rem 2rem;
   overflow: hidden;
-  z-index: 100;
+  z-index: -1;
 }
 
 .sponsorContainer {
@@ -41,6 +41,7 @@
 
 .sponsorSubsection {
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .sponsorSubheading {
@@ -52,6 +53,15 @@
   position: relative;
   transform: translateX(-100vw);
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partnerIcon {
+  margin-right: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-orange);
 }
 
 .sponsorSubheading::after {
@@ -78,12 +88,13 @@
 .card {
   background-color: var(--color-cream);
   border-radius: 12px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   padding: 2rem 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
   transform-style: preserve-3d;
   animation: levitate 6s ease-in-out infinite;
+  border: 1px solid rgba(15, 30, 42, 0.1);
 }
 
 /* Make each card levitate at different speeds */
@@ -115,7 +126,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(var(--accent-primary-rgb), 0.1);
+  background-color: rgba(1, 155, 119, 0.1);
   border-radius: 50%;
   padding: 1rem;
   font-size: 2.5rem;
@@ -162,6 +173,86 @@
   line-height: 1.5;
 }
 
+/* Partner section styles */
+.partnersGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  opacity: 0;
+  transform: translateY(50vh);
+}
+
+.sponsorTier {
+  width: 100%;
+}
+
+.tierTitle {
+  font-family: "Verdana", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-navy);
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+}
+
+.sponsorTier:nth-child(1) .tierTitle {
+  background-color: rgba(218, 88, 30, 0.2);
+  color: var(--color-orange);
+}
+
+.sponsorTier:nth-child(2) .tierTitle {
+  background-color: rgba(254, 139, 194, 0.2);
+  color: var(--accent-secondary);
+}
+
+.sponsorTier:nth-child(3) .tierTitle {
+  background-color: rgba(1, 155, 119, 0.2);
+  color: var(--accent-primary);
+}
+
+.sponsorLogos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.sponsorLogo {
+  width: 180px;
+  height: 100px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border: 1px solid rgba(15, 30, 42, 0.1);
+}
+
+.sponsorLogo img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.sponsorLogo:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.sponsorLogo:hover img {
+  transform: scale(1.1);
+}
+
 @keyframes levitate {
   0%, 100% {
     transform: translateY(0);
@@ -173,12 +264,12 @@
 
 /* What You Get section specific styles */
 .sponsorSubsection:nth-child(2) .card {
-  background-color: rgba(var(--color-cream-rgb), 0.8);
+  background-color: rgba(251, 251, 223, 0.8);
   backdrop-filter: blur(10px);
 }
 
 .sponsorSubsection:nth-child(2) .cardIcon {
-  background-color: rgba(var(--accent-secondary-rgb), 0.2);
+  background-color: rgba(254, 139, 194, 0.2);
 }
 
 /* Responsive styles */
@@ -204,5 +295,23 @@
   
   .card:hover {
     transform: translateY(-8px) scale(1.03);
+  }
+  
+  .sponsorLogos {
+    gap: 1.5rem;
+  }
+  
+  .sponsorLogo {
+    width: 130px;
+    height: 80px;
+  }
+  
+  .tierTitle {
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
+  }
+  
+  .sponsorContent {
+    gap: 4rem;
   }
 }
