@@ -19,21 +19,26 @@ const Navbar = forwardRef(
             <div ref={logoTextRef} className={styles.logoText}></div>
 
             <div className={styles.navMenu}>
-              <a className={styles.navItem} onClick={() => scrollToSection("aboutSection")}>
+              <a
+                className={styles.navItem}
+                onClick={() => scrollToSection("aboutSection")}
+              >
                 About
               </a>
-              <a className={styles.navItem}>
-                Moments
-              </a>
-              <a className={styles.navItem} onClick={() => scrollToSection("scopeSection")}>
+              <a className={styles.navItem}>Moments</a>
+              <a
+                className={styles.navItem}
+                onClick={() => scrollToSection("scopeSection")}
+              >
                 Scope
               </a>
-              <a className={styles.navItem} onClick={() => scrollToSection("chiefSection")}>
+              <a
+                className={styles.navItem}
+                onClick={() => scrollToSection("chiefSection")}
+              >
                 Chief Guest
               </a>
-              <a className={styles.navItem}>
-                Sponsorship
-              </a>
+              <a className={styles.navItem}>Sponsorship</a>
             </div>
 
             <button className={styles.registerBtn}>Register Now</button>
@@ -71,38 +76,41 @@ const Navbar = forwardRef(
           </div>
 
           <a
-            href="#about"
             className={styles.mobileNavItem}
-            onClick={closeMobileMenu}
+            onClick={() => {
+              closeMobileMenu();
+              scrollToSection("aboutSection");
+            }}
           >
             About
           </a>
           <a
-            href="#moments"
             className={styles.mobileNavItem}
-            onClick={closeMobileMenu}
+            onClick={() => {
+              closeMobileMenu();
+            }}
           >
             Moments
           </a>
           <a
-            href="#scope"
             className={styles.mobileNavItem}
-            onClick={closeMobileMenu}
+            onClick={() => {
+              closeMobileMenu();
+              scrollToSection("scopeSection");
+            }}
           >
             Scope
           </a>
           <a
-            href="#chief-guest"
             className={styles.mobileNavItem}
-            onClick={closeMobileMenu}
+            onClick={() => {
+              closeMobileMenu();
+              scrollToSection("chiefSection");
+            }}
           >
             Chief Guest
           </a>
-          <a
-            href="#sponsorship"
-            className={styles.mobileNavItem}
-            onClick={closeMobileMenu}
-          >
+          <a className={styles.mobileNavItem} onClick={closeMobileMenu}>
             Sponsorship
           </a>
 
