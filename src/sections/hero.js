@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Lenis from "lenis";
 import styles from "@styles/hero.module.css";
 import aboutStyles from "@styles/about.module.css"; // Kept for selecting .circle elements
@@ -14,7 +15,7 @@ import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
 import Chief from "@sections/chiefGuest"; // Import the Chief component\
 import Sponsor from "@sections/sponsor"; // Import the Sponsor component
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function Hero() {
   const logoRef = useRef(null);
@@ -25,6 +26,9 @@ function Hero() {
   const mainContentRef = useRef(null);
   const logoTextRef = useRef(null);
   const sparkieContainerRef = useRef(null);
+
+  //time line ref
+  const timelineRef = useRef(null);
 
   // Refs for About component's elements
   const aboutSectionRef = useRef(null); // This will be passed to About for its main container
@@ -56,6 +60,25 @@ function Hero() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  function scrollToSection(sectionName) {
+    const tl = timelineRef.current;
+    if (!tl.labels[sectionName]) {
+    console.warn(`Section '${sectionName}' not found in GSAP labels`);
+    return;
+  }
+
+  const sectionTime = tl.labels[sectionName];
+  const progress = sectionTime / tl.duration();
+  const scrollLength = ScrollTrigger.maxScroll(window);
+  const scrollTo = scrollLength * progress;
+
+  gsap.to(window, {
+    scrollTo: { y: scrollTo },
+    duration: 0.5,
+    ease: "power2.out"
+  });
+  }
 
   // useEffect(() => {
   //   const checkMobile = () => {
@@ -101,12 +124,12 @@ function Hero() {
       lenis.raf(time);
       requestAnimationFrame(raf);
     };
-    const anim=requestAnimationFrame(raf);
+    const anim = requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
       cancelAnimationFrame(anim);
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -172,9 +195,10 @@ function Hero() {
             end: "bottom -=300vh", // 300vh total scroll distance
             scrub: 5,
             pin: true,
-           // markers: true, // Set to true for debugging
+            // markers: true, // Set to true for debugging
           },
         });
+        timelineRef.current = mainScrollTl;
 
         // Phase 1: Entry animations (0-100vh of scroll)
         mainScrollTl
@@ -252,6 +276,7 @@ function Hero() {
             "-=2" // Start this 2 seconds before the end of the previous animation
           )
           .to({}, { duration: 3 })
+          .addLabel("aboutSection", "+=11") // Add a label for the About section
           .to(
             textContainerRefForAbout.current,
             {
@@ -318,6 +343,7 @@ function Hero() {
             "-=2"
           )
           .to({}, { duration: 5 })
+          .addLabel("scopeSection", "+=5") // Add a label for the Scope section
           .to(
             scopeTitleRef.current,
             {
@@ -394,6 +420,7 @@ function Hero() {
             "-=2"
           )
           .to({}, { duration: 5 })
+          .addLabel("chiefSection", "+=5") // Add a label for the Chief section
           .to(
             topTitleRef.current,
             {
@@ -491,17 +518,17 @@ function Hero() {
             },
             "-=2"
           )
-          .to({}, { duration: 5 })
-          // .to(
-          //   sponsorTitleRef.current,
-          //   {
-          //     x: 0,
-          //     opacity: 1,
-          //     duration: 3,
-          //     ease: "power2.out",
-          //   },
-          //   "-=3"
-          // );
+          .to({}, { duration: 5 });
+        // .to(
+        //   sponsorTitleRef.current,
+        //   {
+        //     x: 0,
+        //     opacity: 1,
+        //     duration: 3,
+        //     ease: "power2.out",
+        //   },
+        //   "-=3"
+        // );
       },
     });
 
@@ -510,15 +537,6 @@ function Hero() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       logoTl.kill();
       sparkieTl.kill();
-      if (circleContainerRefForAbout.current) {
-        const circles = circleContainerRefForAbout.current.querySelectorAll(
-          `.${aboutStyles.circle}`
-        );
-        gsap.killTweensOf(circles);
-        gsap.killTweensOf(circleContainerRefForAbout.current);
-      }
-      if (bannerRefForAbout.current)
-        gsap.killTweensOf(bannerRefForAbout.current);
       if (textContainerRefForAbout.current)
         gsap.killTweensOf(textContainerRefForAbout.current);
       document.body.style.overflow = "auto";
@@ -536,6 +554,7 @@ function Hero() {
           isMobileMenuOpen={isMobileMenuOpen}
           toggleMobileMenu={toggleMobileMenu}
           closeMobileMenu={closeMobileMenu}
+          scrollToSection={scrollToSection}
         />
         {/* Initial centered content */}
         <div className={styles.contentWrapper}>
