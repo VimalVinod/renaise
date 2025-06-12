@@ -135,11 +135,11 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className={styles.copyright}>
           <p>
-            © 2024 IEDC CEC – Made with{" "}
+            Made with{" "}
             <span className={styles.heart}>
               <FaHeart size={14} color="red" />
             </span>{" "}
-            by human beings
+            by deelu
           </p>
         </div>
 
@@ -150,7 +150,6 @@ const Footer = () => {
             alt="Sparkie Mascot"
             width={60}
             height={60}
-            layout="responsive"
           />
         </div>
       </div>

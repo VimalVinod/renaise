@@ -82,6 +82,14 @@ body {
   position: relative;
 }
 
+/* .lenis.lenis-smooth {
+  scrollbar-width: none;
+}
+
+.lenis.lenis-smooth::-webkit-scrollbar {
+  display: none;
+} */
+
 img {
   max-width: 100%;
   display: block;
@@ -106,13 +114,14 @@ body::-webkit-scrollbar-track {
   background: transparent;
 }
 
-@media screen and (max-width: 768px) {
-  body {
-    scrollbar-width: none;  
+/* @media screen and (max-width: 768px) {
+  *{
     -ms-overflow-style: none; 
+    scrollbar-width: none;
   }
-  
+
   body::-webkit-scrollbar {
     display: none;
   }
-}
+
+} */

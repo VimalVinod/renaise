@@ -24,6 +24,7 @@ const Navbar = forwardRef(
               height={50}
               className={styles.logoImage}
               ref={logoTextRef}
+              onClick={() => scrollToSection("heroSection")}
             />
 
             <div className={styles.navMenu}>
@@ -46,9 +47,12 @@ const Navbar = forwardRef(
               >
                 Chief Guest
               </a>
-              <a className={styles.navItem}
+              <a
+                className={styles.navItem}
                 onClick={() => scrollToSection("sponsorSection")}
-              >Sponsorship</a>
+              >
+                Sponsorship
+              </a>
             </div>
 
             <button className={styles.registerBtn}>Register Now</button>
@@ -64,78 +68,81 @@ const Navbar = forwardRef(
               <span className={styles.hamburgerLine}></span>
               <span className={styles.hamburgerLine}></span>
             </button>
+            <div
+              className={`${styles.overlay} ${
+                isMobileMenuOpen ? styles.active : ""
+              }`}
+              onClick={closeMobileMenu}
+            ></div>
+
+            {/* Mobile Menu */}
+            <div
+              className={`${styles.mobileMenu} ${
+                isMobileMenuOpen ? styles.active : ""
+              }`}
+            >
+              <div className={styles.mobileMenuHeader}>
+                <span className={styles.mobileMenuTitle}>Menu</span>
+              </div>
+
+              <a
+                className={styles.mobileNavItem}
+                onClick={() => {
+                  closeMobileMenu();
+                  scrollToSection("aboutSection");
+                }}
+              >
+                About
+              </a>
+              <a
+                className={styles.mobileNavItem}
+                onClick={() => {
+                  closeMobileMenu();
+                }}
+              >
+                Moments
+              </a>
+              <a
+                className={styles.mobileNavItem}
+                onClick={() => {
+                  closeMobileMenu();
+                  scrollToSection("scopeSection");
+                }}
+              >
+                Scope
+              </a>
+              <a
+                className={styles.mobileNavItem}
+                onClick={() => {
+                  closeMobileMenu();
+                  scrollToSection("chiefSection");
+                }}
+              >
+                Chief Guest
+              </a>
+              <a
+                className={styles.mobileNavItem}
+                onClick={() => {
+                  closeMobileMenu();
+                  scrollToSection("sponsorSection");
+                }}
+              >
+                Sponsorship
+              </a>
+
+              <div className={styles.mobileRegisterContainer}>
+                <button
+                  className={styles.mobileRegisterBtn}
+                  onClick={closeMobileMenu}
+                >
+                  Register Now
+                </button>
+              </div>
+            </div>
           </div>
         </nav>
 
         {/* Mobile Menu Overlay */}
-        <div
-          className={`${styles.overlay} ${
-            isMobileMenuOpen ? styles.active : ""
-          }`}
-          onClick={closeMobileMenu}
-        ></div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`${styles.mobileMenu} ${
-            isMobileMenuOpen ? styles.active : ""
-          }`}
-        >
-          <div className={styles.mobileMenuHeader}>
-            <span className={styles.mobileMenuTitle}>Menu</span>
-          </div>
-
-          <a
-            className={styles.mobileNavItem}
-            onClick={() => {
-              closeMobileMenu();
-              scrollToSection("aboutSection");
-            }}
-          >
-            About
-          </a>
-          <a
-            className={styles.mobileNavItem}
-            onClick={() => {
-              closeMobileMenu();
-            }}
-          >
-            Moments
-          </a>
-          <a
-            className={styles.mobileNavItem}
-            onClick={() => {
-              closeMobileMenu();
-              scrollToSection("scopeSection");
-            }}
-          >
-            Scope
-          </a>
-          <a
-            className={styles.mobileNavItem}
-            onClick={() => {
-              closeMobileMenu();
-              scrollToSection("chiefSection");
-            }}
-          >
-            Chief Guest
-          </a>
-          <a className={styles.mobileNavItem} onClick={()=>{
-              closeMobileMenu();
-              scrollToSection("sponsorSection");
-          }}>
-            Sponsorship
-          </a>
-
-          <div className={styles.mobileRegisterContainer}>
-            <button
-              className={styles.mobileRegisterBtn}
-              onClick={closeMobileMenu}
-            >
-              Register Now
-            </button>
-          </div>
-        </div>
       </>
     );
   }

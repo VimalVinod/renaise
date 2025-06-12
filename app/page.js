@@ -9,6 +9,13 @@ import Footer from "@sections/footer";
 
 export default function Home() {
 
+  React.useLayoutEffect(()=>{
+        // start at the top of the page
+    window.scrollTo(0, 0);
+    // hide the scrollbar
+    document.documentElement.style.overflow = "hidden";
+  },[])
+
   return (
     <>
       <Blob/>

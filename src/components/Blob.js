@@ -16,15 +16,15 @@ const Blob = () => {
     };
   }, []);
 
-  const moveCircle = scrollY * 0.05;
-  const moveSquare = scrollY * 0.03;
-  const rotateSquare = scrollY * 0.1;
-  const moveTop = scrollY * 0.02;
-  const moveBottom = -scrollY * 0.02;
-  const moveConnector = scrollY * 0.04;
-  const moveDots = -scrollY * 0.03;
-  const moveText = scrollY * 0.04;
-  const moveGrid = -scrollY * 0.01;
+  const moveCircle = scrollY * 0.005;
+  const moveSquare = scrollY * 0.003;
+  const rotateSquare = scrollY * 0.01;
+  const moveTop = scrollY * 0.002;
+  const moveBottom = -scrollY * 0.002;
+  const moveConnector = scrollY * 0.004;
+  const moveDots = -scrollY * 0.003;
+  const moveText = scrollY * 0.004;
+  const moveGrid = -scrollY * 0.001;
 
   return (
     <div className={styles.blueprintContainer}>

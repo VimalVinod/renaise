@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -90,8 +90,8 @@ function Hero() {
 
     gsap.to(window, {
       scrollTo: { y: scrollTo },
-      duration: 0.5,
-      ease: "power2.out",
+      duration: 1,
+      ease: "power2.inOut",
     });
   }
 
@@ -127,27 +127,20 @@ function Hero() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 5, // Higher = slower scrolling
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      mouseMultiplier: 0.4, // Reduce mouse wheel speed
-      touchMultiplier: 1.2,
+      lerp: 0.1, // Controls the smoothness (lower is smoother)
+      smoothTouch: false, // Disables smoothing on touch devices for a native feel
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
     });
 
+    const ticker = (time) => {
+      lenis.raf(time * 1000);
+    };
+
     lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(ticker);
+    gsap.ticker.lagSmoothing(0);
 
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-    const anim = requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-      cancelAnimationFrame(anim);
-    };
-  }, []);
-
-  useEffect(() => {
     // Clear any existing animations
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     const isMobile = window.innerWidth <= 768;
@@ -186,15 +179,15 @@ function Hero() {
         delay: 0.2,
         onComplete: () => {
           // Re-enable scrolling
+          document.documentElement.style.overflow = "";
           document.body.style.overflow = "auto";
-
           // Single scroll timeline that handles all phases over 300vh
           const mainScrollTl = gsap.timeline({
             scrollTrigger: {
               trigger: heroRef.current,
               start: "top top",
-              end: "bottom -=1000vh", //
-              scrub: 5,
+              end: "+=15000vh",
+              scrub: 1.5,
               pin: true,
               // markers: true, // Set to true for debugging
             },
@@ -243,6 +236,7 @@ function Hero() {
               },
               0
             )
+            .addLabel("heroSection", "+=3") // Add a label for the Hero section
             .to(
               mainContentRef.current,
               {
@@ -265,7 +259,7 @@ function Hero() {
               "-=2" // Start this 2 seconds before the end of the previous animation
             )
             .to({}, { duration: 3 })
-            .addLabel("aboutSection", "+=11") // Add a label for the About section
+            .addLabel("aboutSection", "+=7") // Add a label for the About section
             .to(
               textContainerRefForAbout.current,
               {
@@ -297,12 +291,16 @@ function Hero() {
               },
               "-=3"
             ) // Animate the boxes to disappear 2 seconds before the end of the previous animation
-            .to(secondaryTextRefForAbout.current, {
-              y: isMobile ? "-13vh" : 0,
-              x: isMobile ? "-=5%" : "-=30%",
-              duration: 3,
-              ease: "power2.out",
-            },"-=2") // Start this 2 seconds before the end of the previous animation
+            .to(
+              secondaryTextRefForAbout.current,
+              {
+                y: isMobile ? "-13vh" : 0,
+                x: isMobile ? "-=5%" : "-=30%",
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
             .to({}, { duration: 5 })
             .to(
               textContainerRefForAbout.current,
@@ -325,7 +323,7 @@ function Hero() {
               "-=2"
             )
             .to({}, { duration: 5 })
-            .addLabel("scopeSection", "+=5") // Add a label for the Scope section
+            .addLabel("scopeSection", "+=3") // Add a label for the Scope section
             .to(
               scopeTitleRef.current,
               {
@@ -401,7 +399,6 @@ function Hero() {
               },
               "-=2"
             )
-            .to({}, { duration: 5 })
             .addLabel("chiefSection", "+=5") // Add a label for the Chief section
             .to(
               topTitleRef.current,
@@ -411,7 +408,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              "-=3"
+              "-=1"
             )
             .to(
               bottomTitleRef.current,
@@ -455,7 +452,7 @@ function Hero() {
                 stagger: 0.5,
                 ease: "power2.out",
               },
-              "-=2"
+              "-=3"
             )
             .to({}, { duration: 5 })
             .to(chiefSectionRef.current, {
@@ -500,8 +497,7 @@ function Hero() {
               },
               "-=2"
             )
-            .to({}, { duration: 5 })
-            .addLabel("sponsorSection", "+=4") // Add a label for the Sponsor section
+            .addLabel("sponsorSection", "+=7") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
@@ -518,32 +514,32 @@ function Hero() {
                 duration: 2,
                 ease: "power2.out",
               },
-              "-=3"
+              "-=1"
             )
+            .to({}, { duration: 3 }) // Pause to let users read
             .to(
               sponsorTitleRef.current,
               {
                 opacity: 0,
-                x: "+=70vw",
+                y: "-=80vh",
                 duration: 3,
                 ease: "power2.out",
-              },
-              "-=2"
-            ) // Start this 2 seconds before the end of the previous animation
+              }
+            )
             .to(
               whySectionRef.current,
               {
                 zIndex: 100,
                 duration: 0,
               },
-              "-=2"
-            ) // Start this 2 seconds before the end of the previous animation
+              "-=3"
+            ) // Start this 3 seconds before the end of the previous animation
             .to(whyHeadingRef.current, {
               opacity: 1,
               y: 0,
               duration: 2,
               ease: "power2.out",
-            })
+            },"-=3")
             .to(
               whyCardsRef.current,
               {
@@ -552,9 +548,9 @@ function Hero() {
                 duration: 2,
                 ease: "power2.out",
               },
-              "-=1"
+              "-=3"
             ) // Start cards before heading finishes
-            .to({}, { duration: 3 }) // Pause to let users read
+            .to({}, { duration: 5 }) // Pause to let users read
 
             .to(whyHeadingRef.current, {
               opacity: 0.5,
@@ -602,9 +598,9 @@ function Hero() {
                 duration: 2,
                 ease: "power2.out",
               },
-              "-=1" // Start cards before heading finishes
+              "-=2" // Start cards before heading finishes
             )
-            .to({}, { duration: 3 }) // Pause to let users read
+            .to({}, { duration: 5 }) // Pause to let users read
             .to(whatSectionRef.current, {
               zIndex: -1,
               duration: 0,
@@ -624,8 +620,7 @@ function Hero() {
                 ease: "power2.in",
               },
               "-=2"
-            ) // Start cards before heading finishes
-            .to({}, { duration: 3 })
+            )
             .addLabel("partnersSection", "+=5") // Add a label for the Partners section
             .to(
               partnersSectionRef.current,
@@ -633,7 +628,6 @@ function Hero() {
                 zIndex: 100,
                 duration: 0,
               },
-              "-=2"
             ) // Start this 2 seconds before the end of the previous animation
             .to(
               [partnersTitleRef.current, partnerChainRef.current],
@@ -642,55 +636,20 @@ function Hero() {
                 duration: 2,
                 ease: "power2.out",
               },
-              "-=3"
+              "-=1"
             )
-            .to({}, { duration: 5 }) // Pause to let users read
-          // .to(whatHeadingRef.current, {
-          //   opacity: 1,
-          //   x: 0,
-          //   duration: 2,
-          //   ease: "power2.out",
-          // })
-          // .to(
-          //   whatCardsRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=1"
-          // ) // Start cards before heading finishes
-          // .to({}, { duration: 3 }) // Pause to let users read
-
-          // // Fourth: "Our Partners" section
-          // .to(partnersHeadingRef.current, {
-          //   opacity: 1,
-          //   x: 0,
-          //   duration: 2,
-          //   ease: "power2.out",
-          // })
-          // .to(
-          //   partnersGridRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=1"
-          // ) // Start grid before heading finishes
-          // .to({}, { duration: 5 }); // Final pause
+            .to({}, { duration: 5 }); // Pause to let users read
         },
       }
     );
 
     return () => {
-      // Cleanup animations
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       logoTl.kill();
-      sparkieTl.kill();
+      gsap.ticker.remove(ticker);
+      lenis.destroy();
       document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = ""; // Re-enable scrolling on cleanup
     };
   }, []);
 
