@@ -37,7 +37,6 @@ export const metadata = {
     "business meetup",
     "startup networking",
   ],
-  themeColor: "#fbfbdf",
   authors: [{ name: "IEDC Bootcamp CEC" }],
   category: "Education",
   robots: {
@@ -95,6 +94,10 @@ export const metadata = {
     ],
   },
 };
+
+export const viewport={
+  themeColor: "#fbfbdf",
+}
 
 export default function RootLayout({ children }) {
   return (
