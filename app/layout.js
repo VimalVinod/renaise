@@ -37,6 +37,7 @@ export const metadata = {
     "business meetup",
     "startup networking",
   ],
+  themeColor: "#fbfbdf",
   authors: [{ name: "IEDC Bootcamp CEC" }],
   category: "Education",
   robots: {
