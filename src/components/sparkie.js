@@ -2,6 +2,7 @@
 
 import React, { forwardRef, useRef } from "react";
 import styles from "@styles/sparkie.module.css";
+import Image from "next/image";
 
 const Sparkie = forwardRef(({ conatinerRef }, ref) => {
   const sparkieRef = useRef(null);
@@ -10,7 +11,9 @@ const Sparkie = forwardRef(({ conatinerRef }, ref) => {
 
   return (
     <div className={styles.sparkieContainer} ref={conatinerRef}>
-      <img
+      <Image
+        height={200}
+        width={200}
         ref={sparkieRef}
         src="/img/spark.png"
         alt="Sparkie Mascot"

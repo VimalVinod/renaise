@@ -19,8 +19,13 @@
   transition: all 0.3s ease;
 }
 
-.logoText{
-    width: 10%;
+
+.logoImage{
+  width: 180px;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  opacity: 0;
 }
 
 
@@ -279,6 +284,10 @@
   
   .navMenu {
     display: none;
+  }
+
+  .logoImage{
+    width: 115px;
   }
   
   .registerBtn {

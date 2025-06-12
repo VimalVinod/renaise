@@ -11,14 +11,18 @@ import {
   FaIdCardAlt,
   FaHandshake
 } from "react-icons/fa";
+import Image from "next/image";
 
 function Sponsor({
   sponsorSectionRef,
   sponsorTitleRef,
+  whySectionRef,
   whyHeadingRef,
   whyCardsRef,
+  whatSectionRef,
   whatHeadingRef,
   whatCardsRef,
+  partnersSectionRef,
   partnersHeadingRef,
   partnersGridRef
 }) {
@@ -35,7 +39,7 @@ function Sponsor({
 
         <div className={styles.sponsorContent}>
           {/* Why Sponsor Section */}
-          <div className={styles.sponsorSubsection}>
+          <div className={styles.sponsorSubsection} ref={whySectionRef}>
             <h3 className={styles.sponsorSubheading} ref={whyHeadingRef}>
               Why Sponsor Us?
             </h3>
@@ -86,7 +90,7 @@ function Sponsor({
           </div>
 
           {/* What You Get Section */}
-          <div className={styles.sponsorSubsection}>
+          <div className={styles.sponsorSubsection} ref={whatSectionRef}>
             <h3 className={styles.sponsorSubheading} ref={whatHeadingRef}>
               What You Get
             </h3>
@@ -146,10 +150,21 @@ function Sponsor({
                 <h4 className={styles.tierTitle}>Platinum Partners</h4>
                 <div className={styles.sponsorLogos}>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Platinum Sponsor 1" />
+                    <Image
+                    className={styles.sponsorImage}
+                    width={200}
+                    height={100} 
+                    src="/img/sponsors/placeholder-1.webp" 
+                    alt="Platinum Sponsor 1" />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Platinum Sponsor 2" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Platinum Sponsor 2"
+                    />
                   </div>
                 </div>
               </div>
@@ -159,13 +174,31 @@ function Sponsor({
                 <h4 className={styles.tierTitle}>Gold Partners</h4>
                 <div className={styles.sponsorLogos}>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Gold Sponsor 1" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Gold Sponsor 1"
+                    />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Gold Sponsor 2" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Gold Sponsor 2"
+                    />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Gold Sponsor 3" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Gold Sponsor 3"
+                    />
                   </div>
                 </div>
               </div>
@@ -175,16 +208,40 @@ function Sponsor({
                 <h4 className={styles.tierTitle}>Silver Partners</h4>
                 <div className={styles.sponsorLogos}>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Silver Sponsor 1" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Silver Sponsor 1"
+                    />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Silver Sponsor 2" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Silver Sponsor 2"
+                    />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Silver Sponsor 3" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Silver Sponsor 3"
+                    />
                   </div>
                   <div className={styles.sponsorLogo}>
-                    <img src="/img/sponsors/placeholder-1.webp" alt="Silver Sponsor 4" />
+                    <Image
+                      className={styles.sponsorImage}
+                      width={200}
+                      height={100}
+                      src="/img/sponsors/placeholder-1.webp"
+                      alt="Silver Sponsor 4"
+                    />
                   </div>
                 </div>
               </div>

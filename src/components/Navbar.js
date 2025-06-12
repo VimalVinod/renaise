@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import styles from "@styles/navbar.module.css";
+import Image from "next/image";
 
 const Navbar = forwardRef(
   (
@@ -16,7 +17,14 @@ const Navbar = forwardRef(
       <>
         <nav ref={ref} className={styles.navbar}>
           <div className={styles.navContent}>
-            <div ref={logoTextRef} className={styles.logoText}></div>
+            <Image
+              src="/img/logo.svg"
+              alt="Logo"
+              width={50}
+              height={50}
+              className={styles.logoImage}
+              ref={logoTextRef}
+            />
 
             <div className={styles.navMenu}>
               <a
@@ -38,7 +46,9 @@ const Navbar = forwardRef(
               >
                 Chief Guest
               </a>
-              <a className={styles.navItem}>Sponsorship</a>
+              <a className={styles.navItem}
+                onClick={() => scrollToSection("sponsorSection")}
+              >Sponsorship</a>
             </div>
 
             <button className={styles.registerBtn}>Register Now</button>
@@ -110,7 +120,10 @@ const Navbar = forwardRef(
           >
             Chief Guest
           </a>
-          <a className={styles.mobileNavItem} onClick={closeMobileMenu}>
+          <a className={styles.mobileNavItem} onClick={()=>{
+              closeMobileMenu();
+              scrollToSection("sponsorSection");
+          }}>
             Sponsorship
           </a>
 

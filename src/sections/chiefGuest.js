@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/cheif.module.css";
+import Image from "next/image";
 
 function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSectionRef }) {
   return (
@@ -14,11 +15,12 @@ function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSect
           <div className={`${styles.guest} ${styles.chief}`} ref={chiefMinisterRef} >
             <div className={styles.imageContainer}>
               <div className={styles.imageWrapper}>
-                <img
+                <Image
+                  width={200} 
+                  height={200}
                   src="/img/hoomans/cheif-minister.png"
                   alt="Shri Pinarayi Vijayan"
                   className={styles.guestImage}
-                  loading="lazy"
                 />
               </div>
             </div>
@@ -33,11 +35,12 @@ function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSect
           <div className={`${styles.guest} ${styles.ceo}`} ref={ceoRef} id="ceo">
             <div className={styles.imageContainer}>
               <div className={styles.imageWrapper}>
-                <img
+                <Image
+                  width={200}
+                  height={200}
                   src="/img/hoomans/ceo-ksum.png"
                   alt="Anoop Ambika"
                   className={styles.guestImage}
-                  loading="lazy"
                 />
               </div>
             </div>

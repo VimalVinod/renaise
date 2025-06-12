@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Lenis from "lenis";
 import styles from "@styles/hero.module.css";
-import aboutStyles from "@styles/about.module.css"; // Kept for selecting .circle elements
 import Sparkie from "@components/sparkie";
 import Navbar from "@components/Navbar";
 import MainContent from "@components/MainContent";
@@ -36,6 +36,13 @@ function Hero() {
   const bannerRefForAbout = useRef(null); // For the banner in About
   const textContainerRefForAbout = useRef(null); // For the text container in About
   const secondaryTextRefForAbout = useRef(null); // For the secondary text in About
+  const textContainerBoxesRefForAbout = useRef([]); // For the boxes in About
+
+  const addRefToBoxes = (ref) => {
+    if (!textContainerBoxesRefForAbout.current.includes(ref)) {
+      textContainerBoxesRefForAbout.current.push(ref);
+    }
+  };
 
   //refs for scope section
   const scopeTitleRef = useRef(null);
@@ -53,10 +60,13 @@ function Hero() {
   //refs for sponsor section
   const sponsorSectionRef = useRef(null);
   const sponsorTitleRef = useRef(null);
+  const whySectionRef = useRef(null); // This will be passed to Sponsor for its main container
   const whyHeadingRef = useRef(null);
   const whyCardsRef = useRef(null);
+  const whatSectionRef = useRef(null); // This will be passed to Sponsor for its main container
   const whatHeadingRef = useRef(null);
   const whatCardsRef = useRef(null);
+  const partnersSectionRef = useRef(null); // This will be passed to Sponsor for its main container
   const partnersHeadingRef = useRef(null);
   const partnersGridRef = useRef(null);
 
@@ -194,7 +204,7 @@ function Hero() {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top top",
-            end: "bottom -=500vh", // 300vh total scroll distance
+            end: "bottom -=1000vh", //
             scrub: 5,
             pin: true,
             // markers: true, // Set to true for debugging
@@ -208,13 +218,31 @@ function Hero() {
             logoRef.current,
             {
               y: isMobile ? "-=41vh" : "-=35vh",
-              x: isMobile ? "-30vw" : "-=40vw",
-              height: "auto",
-              width: isMobile ? "30%" : "11%",
+              x: isMobile ? "-30vw" : "-=33vw",
+              width: isMobile ? "115px" : "180px",
               duration: 3,
               ease: "power2.out",
             },
             0
+          )
+          .to(
+            navRef.current,
+            { opacity: 1, y: 0, duration: 5, ease: "power2.inOut" },
+            0
+          )
+          .to(
+            logoTextRef.current,
+            {
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            "+=0.5"
+          )
+          .to(
+            logoRef.current,
+            { opacity: 0, duration: 0.2, ease: "power2.in" },
+            "<"
           )
           .to(
             taglineRef.current,
@@ -245,11 +273,7 @@ function Hero() {
             },
             0
           )
-          .to(
-            navRef.current,
-            { opacity: 1, y: 0, duration: 5, ease: "power2.inOut" },
-            0
-          )
+
           .to(
             mainContentRef.current,
             {
@@ -283,7 +307,7 @@ function Hero() {
             textContainerRefForAbout.current,
             {
               y: "-50%",
-              fontSize: isMobile ? "2rem" : "4rem",
+              fontSize: isMobile ? "1.8rem" : "4rem",
               opacity: 1,
               duration: 3,
               ease: "power2.out",
@@ -293,37 +317,30 @@ function Hero() {
           .to({}, { duration: 3 })
           .to(textContainerRefForAbout.current, {
             y: isMobile ? "-=100%" : "-=50%",
-            x: isMobile ? "-=6%" : "-=30%",
+            x: isMobile ? "-=6%" : "-=20vw",
             fontSize: isMobile ? "1.8rem" : "2rem",
             justifyContent: "flex-start",
             duration: 3,
             ease: "power2.out",
           })
+          .to(
+            textContainerBoxesRefForAbout.current,
+            {
+              width: 0,
+              height: 0,
+              opacity: 0,
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=3"
+          ) // Animate the boxes to disappear 2 seconds before the end of the previous animation
           .to(secondaryTextRefForAbout.current, {
             y: isMobile ? "-13vh" : 0,
             x: isMobile ? "-=5%" : "-=30%",
             duration: 3,
             ease: "power2.out",
           })
-          .to(
-            sparkieRef.current,
-            {
-              bottom: isMobile ? "-=15%" : "-=0",
-              x: isMobile ? "-=45vw" : "-=50vw",
-              opacity: 1,
-              duration: 3,
-              ease: "power2.inOut",
-            },
-            "-=2"
-          )
           .to({}, { duration: 5 })
-          .to(sparkieRef.current, {
-            x: "-=100vw",
-            opacity: 0,
-            duration: 5,
-            ease: "power2.in",
-            delay: 1,
-          })
           .to(
             textContainerRefForAbout.current,
             {
@@ -521,80 +538,167 @@ function Hero() {
             "-=2"
           )
           .to({}, { duration: 5 })
-          // .addLabel("sponsorSection", "+=5") // Add a label for the Sponsor section
-          // .to(sponsorSectionRef.current, {
-          //   zIndex: 100,
-          //   duration: 0,
-          // })
-          // // First: Sponsor title
-          // .to(
-          //   sponsorTitleRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=3"
-          // )
-          // .to({}, { duration: 2 }) // Pause between sections
+          .addLabel("sponsorSection", "+=4") // Add a label for the Sponsor section
+          .to(
+            sponsorSectionRef.current,
+            {
+              zIndex: 100,
+              duration: 2,
+            },
+            "-=3"
+          ) // Start this 3 seconds before the end of the previous animation
+          .to(
+            sponsorTitleRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 2,
+              ease: "power2.out",
+            },
+            "-=3"
+          )
+          .to(
+            sponsorTitleRef.current,
+            {
+              opacity: 0,
+              x: "+=70vw",
+              duration: 3,
+              ease: "power2.out",
+            },
+            "-=2"
+          ) // Start this 2 seconds before the end of the previous animation
+          .to(whySectionRef.current, {
+            zIndex: 100,
+            duration: 0,
+          }, "-=2") // Start this 2 seconds before the end of the previous animation
+          .to(whyHeadingRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 2,
+            ease: "power2.out",
+          })
+        .to(
+          whyCardsRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 2,
+            ease: "power2.out",
+          },
+          "-=1"
+        ) // Start cards before heading finishes
+        .to({}, { duration: 3 }) // Pause to let users read
+        
+        .to(whyHeadingRef.current, {
+          opacity: 0.5,
+          y: "-=100vh",
+          duration: 2,
+          ease: "power2.in",
+        })
+        .to(whyCardsRef.current, {
+          opacity: 0.5,
+          y: "-=100vh",
+          duration: 2,
+          ease: "power2.in",
+        },"-=2") // Start cards before heading finishes
+        .to(whySectionRef.current, {
+          zIndex: -1,
+          duration: 0,
+        })
+        .to(whatSectionRef.current, {
+          zIndex: 100,
+          duration: 0,
+        }, "-=2") // Start this 2 seconds before the end of the previous animation
+        .to(whatHeadingRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: "power2.out",
+        }, "-=1")
+        .to(
+          whatCardsRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 2,
+            ease: "power2.out",
+          }
+        , "-=1" // Start cards before heading finishes
+        )
+        .to({}, { duration: 3 }) // Pause to let users read
+        .to(whatSectionRef.current, {
+          zIndex: -1,
+          duration: 0,
+        })
+        .to(whatHeadingRef.current, {
+          opacity: 0.5,
+          y: "-=100vh",
+          duration: 2,
+          ease: "power2.in",
+        })
+        .to(whatCardsRef.current, {
+          opacity: 0.5,
+          y: "-=100vh",
+          duration: 2,
+          ease: "power2.in",
+        }, "-=2") // Start cards before heading finishes
+        .to(partnersSectionRef.current, {
+          zIndex: 100,
+          duration: 0,
+        }, "-=2") // Start this 2 seconds before the end of the previous animation
+        .to(partnersHeadingRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: "power2.out",
+        }, "-=1")
+        .to(
+          partnersGridRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 2,
+            ease: "power2.out",
+          },
+          "-=1"
+        ) // Start grid before heading finishes
+        .to({}, { duration: 5 }) // Final pause
+        // .to(whatHeadingRef.current, {
+        //   opacity: 1,
+        //   x: 0,
+        //   duration: 2,
+        //   ease: "power2.out",
+        // })
+        // .to(
+        //   whatCardsRef.current,
+        //   {
+        //     opacity: 1,
+        //     y: 0,
+        //     duration: 2,
+        //     ease: "power2.out",
+        //   },
+        //   "-=1"
+        // ) // Start cards before heading finishes
+        // .to({}, { duration: 3 }) // Pause to let users read
 
-          // // Second: "Why Sponsor Us?" section
-          // .to(whyHeadingRef.current, {
-          //   opacity: 1,
-          //   x: 0,
-          //   duration: 2,
-          //   ease: "power2.out",
-          // })
-          // .to(
-          //   whyCardsRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=1"
-          // ) // Start cards before heading finishes
-          // .to({}, { duration: 3 }) // Pause to let users read
-
-          // // Third: "What You Get" section
-          // .to(whatHeadingRef.current, {
-          //   opacity: 1,
-          //   x: 0,
-          //   duration: 2,
-          //   ease: "power2.out",
-          // })
-          // .to(
-          //   whatCardsRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=1"
-          // ) // Start cards before heading finishes
-          // .to({}, { duration: 3 }) // Pause to let users read
-
-          // // Fourth: "Our Partners" section
-          // .to(partnersHeadingRef.current, {
-          //   opacity: 1,
-          //   x: 0,
-          //   duration: 2,
-          //   ease: "power2.out",
-          // })
-          // .to(
-          //   partnersGridRef.current,
-          //   {
-          //     opacity: 1,
-          //     y: 0,
-          //     duration: 2,
-          //     ease: "power2.out",
-          //   },
-          //   "-=1"
-          // ) // Start grid before heading finishes
-          // .to({}, { duration: 5 }); // Final pause
+        // // Fourth: "Our Partners" section
+        // .to(partnersHeadingRef.current, {
+        //   opacity: 1,
+        //   x: 0,
+        //   duration: 2,
+        //   ease: "power2.out",
+        // })
+        // .to(
+        //   partnersGridRef.current,
+        //   {
+        //     opacity: 1,
+        //     y: 0,
+        //     duration: 2,
+        //     ease: "power2.out",
+        //   },
+        //   "-=1"
+        // ) // Start grid before heading finishes
+        // .to({}, { duration: 5 }); // Final pause
       },
     });
 
@@ -603,8 +707,6 @@ function Hero() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       logoTl.kill();
       sparkieTl.kill();
-      if (textContainerRefForAbout.current)
-        gsap.killTweensOf(textContainerRefForAbout.current);
       document.body.style.overflow = "auto";
     };
   }, []);
@@ -625,7 +727,9 @@ function Hero() {
         {/* Initial centered content */}
         <div className={styles.contentWrapper}>
           <div className={styles.logoContainer}>
-            <img
+            <Image
+              width={200}
+              height={200}
               ref={logoRef}
               src="/img/logo.svg"
               alt="RenAISE Logo"
@@ -645,6 +749,7 @@ function Hero() {
           bannerRef={bannerRefForAbout}
           textContainerRef={textContainerRefForAbout}
           secondaryTextRef={secondaryTextRefForAbout}
+          boxRef={addRefToBoxes}
         />
         <ScopeOfEvent
           scopeTitleRef={scopeTitleRef}
@@ -668,6 +773,9 @@ function Hero() {
           whatCardsRef={whatCardsRef}
           partnersHeadingRef={partnersHeadingRef}
           partnersGridRef={partnersGridRef}
+          whySectionRef={whySectionRef}
+          whatSectionRef={whatSectionRef} 
+          partnersSectionRef={partnersSectionRef}
         />
       </section>
     </>

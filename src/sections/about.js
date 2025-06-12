@@ -1,19 +1,51 @@
 import React from "react";
 import styles from "@styles/about.module.css";
+import Image from "next/image";
 
-function About({ aboutRef, bannerRef, textContainerRef, secondaryTextRef }) {
+function About({
+  aboutRef,
+  bannerRef,
+  textContainerRef,
+  secondaryTextRef,
+  boxRef,
+}) {
   return (
     <div className={styles.container} ref={aboutRef}>
-      <div className={styles.banner} ref={bannerRef}>
-      </div>
+      <div className={styles.banner} ref={bannerRef}></div>
       <div className={styles.textContainer} ref={textContainerRef}>
-        <h1 className={styles.textWords}>A Decade Of</h1>
-        <h1 className={styles.textWords}
-          style={{ color: "var(--color-teal)" }}
-        > Empowering</h1>
-        <h1 className={styles.textWords}
-          style={{ color: "var(--color-red)" }}
-        >Innovation</h1>
+        <h1 className={styles.textWords}>
+          A Decade
+          <div
+            src="/img/logo.svg"
+            alt="Renaise Logo"
+            width={100}
+            height={100}
+            className={styles.logoImageBox}
+            ref={boxRef}
+          />{" "}
+          Of
+        </h1>
+        <h1 className={styles.textWords} style={{ color: "var(--color-teal)" }}>
+          <div
+            src="/img/logo.svg"
+            alt="Renaise Logo"
+            width={100}
+            height={100}
+            className={styles.logoImageBox}
+            ref={boxRef}
+          />
+          Empowering
+        </h1>
+        <h1 className={styles.textWords} style={{ color: "var(--color-red)" }}>
+          Innovation <div
+            src="/img/logo.svg"
+            alt="Renaise Logo"
+            width={100}
+            height={100}
+            className={styles.logoImageBox}
+            ref={boxRef}
+          />
+        </h1>
       </div>
       <p className={styles.secondaryTextContainer} ref={secondaryTextRef}>
         Renaise is Kerala&apos;s largest student-led entrepreneurship meetup,
