@@ -98,6 +98,67 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Event",
+              name: "Renaise 2025 | All Kerala Entrepreneurship Meetup",
+              description:
+                "Kerala's largest student-led entrepreneurship meetup organized by IEDC Bootcamp CEC. Join us for workshops, networking, and startup opportunities.",
+              //starts on 18th june 2025
+                startDate: "2025-06-18T09:00:00+05:30",
+              //ends on 5th july 2025
+              endDate: "2025-07-05T18:00:00+05:30",
+              eventStatus: "https://schema.org/EventScheduled",
+              eventAttendanceMode:
+                "https://schema.org/OfflineEventAttendanceMode",
+              location: {
+                "@type": "Place",
+                name: "College of Engineering Chengannur",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "College of Engineering Chengannur",
+                  addressLocality: "Chengannur",
+                  addressRegion: "Kerala",
+                  postalCode: "689121",
+                  addressCountry: "IN",
+                },
+              },
+              image: [
+                "https://renaise.iedcbootcampcec.org/og-image.jpg",
+              ],
+              organizer: {
+                "@type": "Organization",
+                name: "IEDC Bootcamp CEC",
+                url: "https://iedcbootcampcec.org",
+              },
+              offers: {
+                "@type": "Offer",
+                url: "https://renaise.iedcbootcampcec.org/tickets",
+                price: "0",
+                priceCurrency: "INR",
+                availability: "https://schema.org/InStock",
+                //valid from 18th june 2025
+                validFrom: "2025-06-18T09:00:00+05:30",
+                validThrough: "2025-07-05T18:00:00+05:30",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Renaise 2025 Ticket",
+                  description:
+                    "Free entry to Renaise 2025 - All Kerala Entrepreneurship Meetup",
+                },
+              },
+              performer: {
+                "@type": "Organization",
+                name: "IEDC Bootcamp CEC",
+              },
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${inter.variable}`}
       >
