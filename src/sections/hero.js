@@ -14,6 +14,7 @@ import About from "@sections/about"; // Import the About component
 import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
 import Chief from "@sections/chiefGuest"; // Import the Chief component\
 import Sponsor from "@sections/sponsor"; // Import the Sponsor component
+import Partners from "@sections/partners"; // Import the Partners component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -66,9 +67,11 @@ function Hero() {
   const whatSectionRef = useRef(null); // This will be passed to Sponsor for its main container
   const whatHeadingRef = useRef(null);
   const whatCardsRef = useRef(null);
-  const partnersSectionRef = useRef(null); // This will be passed to Sponsor for its main container
-  const partnersHeadingRef = useRef(null);
-  const partnersGridRef = useRef(null);
+
+  //refs for partners section
+  const partnersSectionRef = useRef(null);
+  const partnerChainRef = useRef(null);
+  const partnersTitleRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -151,12 +154,6 @@ function Hero() {
 
     // Initial animation timeline setup
     const logoTl = gsap.timeline();
-    const sparkieTl = gsap.timeline();
-
-    sparkieTl.set(sparkieRef.current, {
-      opacity: 0,
-      x: isMobile ? -100 : -150,
-    });
 
     gsap.set(mainContentRef.current, {
       x: "-=50vw",
@@ -166,18 +163,6 @@ function Hero() {
     });
 
     // Initial logo animation
-    logoTl.fromTo(
-      logoRef.current,
-      { opacity: 0, scale: 0.8, y: -30 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 1.5,
-        ease: "power3.out",
-        delay: 0.2,
-      }
-    );
 
     // Tagline animation
     gsap.to(taglineRef.current, {
@@ -189,518 +174,516 @@ function Hero() {
     });
 
     // Sparkie animation
-    sparkieTl.to(sparkieRef.current, {
-      opacity: 1,
-      x: isMobile ? 100 : 150,
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.out",
-      onComplete: () => {
-        // Re-enable scrolling
-        document.body.style.overflow = "auto";
+    logoTl.fromTo(
+      logoRef.current,
+      { opacity: 0, scale: 0.8, y: -30 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.2,
+        onComplete: () => {
+          // Re-enable scrolling
+          document.body.style.overflow = "auto";
 
-        // Single scroll timeline that handles all phases over 300vh
-        const mainScrollTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom -=1000vh", //
-            scrub: 5,
-            pin: true,
-            // markers: true, // Set to true for debugging
-          },
-        });
-        timelineRef.current = mainScrollTl;
+          // Single scroll timeline that handles all phases over 300vh
+          const mainScrollTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom -=1000vh", //
+              scrub: 5,
+              pin: true,
+              // markers: true, // Set to true for debugging
+            },
+          });
+          timelineRef.current = mainScrollTl;
 
-        // Phase 1: Entry animations (0-100vh of scroll)
-        mainScrollTl
-          .to(
-            logoRef.current,
-            {
-              y: isMobile ? "-=41vh" : "-=35vh",
-              x: isMobile ? "-30vw" : "-=33vw",
-              width: isMobile ? "115px" : "180px",
+          // Phase 1: Entry animations (0-100vh of scroll)
+          mainScrollTl
+            .to(
+              logoRef.current,
+              {
+                y: isMobile ? "-=41vh" : "-=35vh",
+                x: isMobile ? "-30vw" : "-=33vw",
+                width: isMobile ? "115px" : "180px",
+                duration: 3,
+                ease: "power2.out",
+              },
+              0
+            )
+            .to(
+              navRef.current,
+              { opacity: 1, y: 0, duration: 5, ease: "power2.inOut" },
+              0
+            )
+            .to(
+              logoTextRef.current,
+              {
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.out",
+              },
+              "+=0.5"
+            )
+            .to(
+              logoRef.current,
+              { opacity: 0, duration: 0.2, ease: "power2.in" },
+              "<"
+            )
+            .to(
+              taglineRef.current,
+              {
+                opacity: 0,
+                x: "-=50vh",
+                duration: 1,
+                ease: "power2.out",
+              },
+              0
+            )
+            .to(
+              mainContentRef.current,
+              {
+                opacity: 1,
+                x: 0,
+                duration: 5,
+                ease: "power2.inOut",
+              },
+              0
+            )
+            .to({}, { duration: 5 })
+            .to(
+              mainContentRef.current,
+              {
+                x: "-=100vw",
+                opacity: 0,
+                duration: 5,
+                ease: "power2.in",
+              },
+              "-=2" // Start this 2 seconds before the end of the previous animation
+            )
+            .to({}, { duration: 3 })
+            .addLabel("aboutSection", "+=11") // Add a label for the About section
+            .to(
+              textContainerRefForAbout.current,
+              {
+                y: "-50%",
+                fontSize: isMobile ? "1.8rem" : "4rem",
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=3"
+            )
+            .to({}, { duration: 3 })
+            .to(textContainerRefForAbout.current, {
+              y: isMobile ? "-=100%" : "-=50%",
+              x: isMobile ? "-=6%" : "-=20vw",
+              fontSize: isMobile ? "1.8rem" : "2rem",
+              justifyContent: "flex-start",
               duration: 3,
               ease: "power2.out",
-            },
-            0
-          )
-          .to(
-            navRef.current,
-            { opacity: 1, y: 0, duration: 5, ease: "power2.inOut" },
-            0
-          )
-          .to(
-            logoTextRef.current,
-            {
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-            },
-            "+=0.5"
-          )
-          .to(
-            logoRef.current,
-            { opacity: 0, duration: 0.2, ease: "power2.in" },
-            "<"
-          )
-          .to(
-            taglineRef.current,
-            {
-              opacity: 0,
-              x: "-=50vh",
-              duration: 1,
-              ease: "power2.out",
-            },
-            0
-          )
-          .to(
-            sparkieRef.current,
-            {
-              x: isMobile ? "+=45vw" : "+=60vw",
-              scale: isMobile ? "+=0.5" : "+=1.2",
-              duration: 5,
-              ease: "power2.out",
-            },
-            0
-          )
-          .to(
-            sparkieContainerRef.current,
-            {
-              bottom: isMobile ? "-=15%" : "-=0",
-              duration: 5,
-              ease: "power2.inOut",
-            },
-            0
-          )
-
-          .to(
-            mainContentRef.current,
-            {
-              opacity: 1,
-              x: 0,
-              duration: 5,
-              ease: "power2.inOut",
-            },
-            0
-          )
-          .to({}, { duration: 5 })
-          .to(sparkieRef.current, {
-            x: "+=50vw",
-            opacity: 0,
-            duration: 5,
-            ease: "power2.in",
-          })
-          .to(
-            mainContentRef.current,
-            {
-              x: "-=100vw",
-              opacity: 0,
-              duration: 5,
-              ease: "power2.in",
-            },
-            "-=2" // Start this 2 seconds before the end of the previous animation
-          )
-          .to({}, { duration: 3 })
-          .addLabel("aboutSection", "+=11") // Add a label for the About section
-          .to(
-            textContainerRefForAbout.current,
-            {
-              y: "-50%",
-              fontSize: isMobile ? "1.8rem" : "4rem",
-              opacity: 1,
+            })
+            .to(
+              textContainerBoxesRefForAbout.current,
+              {
+                width: 0,
+                height: 0,
+                opacity: 0,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=3"
+            ) // Animate the boxes to disappear 2 seconds before the end of the previous animation
+            .to(secondaryTextRefForAbout.current, {
+              y: isMobile ? "-13vh" : 0,
+              x: isMobile ? "-=5%" : "-=30%",
               duration: 3,
               ease: "power2.out",
-            },
-            "-=3"
-          )
-          .to({}, { duration: 3 })
-          .to(textContainerRefForAbout.current, {
-            y: isMobile ? "-=100%" : "-=50%",
-            x: isMobile ? "-=6%" : "-=20vw",
-            fontSize: isMobile ? "1.8rem" : "2rem",
-            justifyContent: "flex-start",
-            duration: 3,
-            ease: "power2.out",
-          })
-          .to(
-            textContainerBoxesRefForAbout.current,
-            {
-              width: 0,
-              height: 0,
-              opacity: 0,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=3"
-          ) // Animate the boxes to disappear 2 seconds before the end of the previous animation
-          .to(secondaryTextRefForAbout.current, {
-            y: isMobile ? "-13vh" : 0,
-            x: isMobile ? "-=5%" : "-=30%",
-            duration: 3,
-            ease: "power2.out",
-          })
-          .to({}, { duration: 5 })
-          .to(
-            textContainerRefForAbout.current,
-            {
-              x: "-=50%",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to(
-            secondaryTextRefForAbout.current,
-            {
-              x: "-=50%",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to({}, { duration: 5 })
-          .addLabel("scopeSection", "+=5") // Add a label for the Scope section
-          .to(
-            scopeTitleRef.current,
-            {
-              x: 0,
-              opacity: 1,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=3"
-          )
-          .to(
-            scopeSubtitleRef.current,
-            {
-              y: 0,
-              opacity: 1,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=2"
-          )
-          .to(
-            scopeSectionRef.current,
-            {
-              zIndex: 100,
+            },"-=2") // Start this 2 seconds before the end of the previous animation
+            .to({}, { duration: 5 })
+            .to(
+              textContainerRefForAbout.current,
+              {
+                x: "-=50%",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to(
+              secondaryTextRefForAbout.current,
+              {
+                x: "-=50%",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 5 })
+            .addLabel("scopeSection", "+=5") // Add a label for the Scope section
+            .to(
+              scopeTitleRef.current,
+              {
+                x: 0,
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=3"
+            )
+            .to(
+              scopeSubtitleRef.current,
+              {
+                y: 0,
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to(
+              scopeSectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=2"
+            )
+            .to(
+              cardsContainerRef.current,
+              {
+                y: 0,
+                x: 0,
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 5 })
+            .to(scopeSectionRef.current, {
+              zIndex: -1,
               duration: 0,
-            },
-            "-=2"
-          )
-          .to(
-            cardsContainerRef.current,
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=2"
-          )
-          .to({}, { duration: 5 })
-          .to(scopeSectionRef.current, {
-            zIndex: -1,
-            duration: 0,
-          })
-          .to(
-            scopeTitleRef.current,
-            {
-              x: "-=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to(
-            scopeSubtitleRef.current,
-            {
-              x: "-=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to(
-            cardsContainerRef.current,
-            {
-              y: "-=50vh",
-              x: "-=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to({}, { duration: 5 })
-          .addLabel("chiefSection", "+=5") // Add a label for the Chief section
-          .to(
-            topTitleRef.current,
-            {
-              x: "-10vw",
-              opacity: 1,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=3"
-          )
-          .to(
-            bottomTitleRef.current,
-            {
-              x: isMobile ? "10vw" : 0,
-              opacity: 1,
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=1"
-          )
-          .to(
-            chiefSectionRef.current,
-            {
-              zIndex: 100,
+            })
+            .to(
+              scopeTitleRef.current,
+              {
+                x: "-=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to(
+              scopeSubtitleRef.current,
+              {
+                x: "-=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to(
+              cardsContainerRef.current,
+              {
+                y: "-=50vh",
+                x: "-=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 5 })
+            .addLabel("chiefSection", "+=5") // Add a label for the Chief section
+            .to(
+              topTitleRef.current,
+              {
+                x: "-10vw",
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=3"
+            )
+            .to(
+              bottomTitleRef.current,
+              {
+                x: isMobile ? "10vw" : 0,
+                opacity: 1,
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=1"
+            )
+            .to(
+              chiefSectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=3"
+            )
+            .to(
+              chiefMinisterRef.current,
+              {
+                y: isMobile ? "25vh" : 0,
+                x: isMobile ? "-20vw" : "-10vw",
+                rotateY: 15,
+                opacity: 1,
+                duration: 3,
+                stagger: 0.5,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to(
+              ceoRef.current,
+              {
+                opacity: 1,
+                y: isMobile ? "20vh" : 0,
+                x: isMobile ? "20vw" : "10vw",
+                rotateY: -15,
+                duration: 5,
+                stagger: 0.5,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 5 })
+            .to(chiefSectionRef.current, {
+              zIndex: -1,
               duration: 0,
-            },
-            "-=3"
-          )
-          .to(
-            chiefMinisterRef.current,
-            {
-              y: isMobile ? "25vh" : 0,
-              x: isMobile ? "-20vw" : "-10vw",
-              rotateY: 15,
-              opacity: 1,
-              duration: 3,
-              stagger: 0.5,
-              ease: "power2.out",
-            },
-            "-=2"
-          )
-          .to(
-            ceoRef.current,
-            {
-              opacity: 1,
-              y: isMobile ? "20vh" : 0,
-              x: isMobile ? "20vw" : "10vw",
-              rotateY: -15,
-              duration: 5,
-              stagger: 0.5,
-              ease: "power2.out",
-            },
-            "-=2"
-          )
-          .to({}, { duration: 5 })
-          .to(chiefSectionRef.current, {
-            zIndex: -1,
-            duration: 0,
-          })
-          .to(bottomTitleRef.current, {
-            x: "+=50vw",
-            opacity: 0,
-            duration: 3,
-            ease: "power2.in",
-          })
-          .to(
-            topTitleRef.current,
-            {
+            })
+            .to(bottomTitleRef.current, {
               x: "+=50vw",
               opacity: 0,
               duration: 3,
               ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to(
-            chiefMinisterRef.current,
-            {
-              y: "-=50vh",
-              x: "+=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=3"
-          )
-          .to(
-            ceoRef.current,
-            {
-              y: "+=50vh",
-              x: "-=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            },
-            "-=2"
-          )
-          .to({}, { duration: 5 })
-          .addLabel("sponsorSection", "+=4") // Add a label for the Sponsor section
-          .to(
-            sponsorSectionRef.current,
-            {
-              zIndex: 100,
-              duration: 2,
-            },
-            "-=3"
-          ) // Start this 3 seconds before the end of the previous animation
-          .to(
-            sponsorTitleRef.current,
-            {
+            })
+            .to(
+              topTitleRef.current,
+              {
+                x: "+=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to(
+              chiefMinisterRef.current,
+              {
+                y: "-=50vh",
+                x: "+=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=3"
+            )
+            .to(
+              ceoRef.current,
+              {
+                y: "+=50vh",
+                x: "-=50vw",
+                opacity: 0,
+                duration: 3,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 5 })
+            .addLabel("sponsorSection", "+=4") // Add a label for the Sponsor section
+            .to(
+              sponsorSectionRef.current,
+              {
+                zIndex: 100,
+                duration: 2,
+              },
+              "-=3"
+            ) // Start this 3 seconds before the end of the previous animation
+            .to(
+              sponsorTitleRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=3"
+            )
+            .to(
+              sponsorTitleRef.current,
+              {
+                opacity: 0,
+                x: "+=70vw",
+                duration: 3,
+                ease: "power2.out",
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(
+              whySectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(whyHeadingRef.current, {
               opacity: 1,
               y: 0,
               duration: 2,
               ease: "power2.out",
-            },
-            "-=3"
-          )
-          .to(
-            sponsorTitleRef.current,
-            {
-              opacity: 0,
-              x: "+=70vw",
-              duration: 3,
-              ease: "power2.out",
-            },
-            "-=2"
-          ) // Start this 2 seconds before the end of the previous animation
-          .to(whySectionRef.current, {
-            zIndex: 100,
-            duration: 0,
-          }, "-=2") // Start this 2 seconds before the end of the previous animation
-          .to(whyHeadingRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 2,
-            ease: "power2.out",
-          })
-        .to(
-          whyCardsRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 2,
-            ease: "power2.out",
-          },
-          "-=1"
-        ) // Start cards before heading finishes
-        .to({}, { duration: 3 }) // Pause to let users read
-        
-        .to(whyHeadingRef.current, {
-          opacity: 0.5,
-          y: "-=100vh",
-          duration: 2,
-          ease: "power2.in",
-        })
-        .to(whyCardsRef.current, {
-          opacity: 0.5,
-          y: "-=100vh",
-          duration: 2,
-          ease: "power2.in",
-        },"-=2") // Start cards before heading finishes
-        .to(whySectionRef.current, {
-          zIndex: -1,
-          duration: 0,
-        })
-        .to(whatSectionRef.current, {
-          zIndex: 100,
-          duration: 0,
-        }, "-=2") // Start this 2 seconds before the end of the previous animation
-        .to(whatHeadingRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power2.out",
-        }, "-=1")
-        .to(
-          whatCardsRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 2,
-            ease: "power2.out",
-          }
-        , "-=1" // Start cards before heading finishes
-        )
-        .to({}, { duration: 3 }) // Pause to let users read
-        .to(whatSectionRef.current, {
-          zIndex: -1,
-          duration: 0,
-        })
-        .to(whatHeadingRef.current, {
-          opacity: 0.5,
-          y: "-=100vh",
-          duration: 2,
-          ease: "power2.in",
-        })
-        .to(whatCardsRef.current, {
-          opacity: 0.5,
-          y: "-=100vh",
-          duration: 2,
-          ease: "power2.in",
-        }, "-=2") // Start cards before heading finishes
-        .to(partnersSectionRef.current, {
-          zIndex: 100,
-          duration: 0,
-        }, "-=2") // Start this 2 seconds before the end of the previous animation
-        .to(partnersHeadingRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power2.out",
-        }, "-=1")
-        .to(
-          partnersGridRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 2,
-            ease: "power2.out",
-          },
-          "-=1"
-        ) // Start grid before heading finishes
-        .to({}, { duration: 5 }) // Final pause
-        // .to(whatHeadingRef.current, {
-        //   opacity: 1,
-        //   x: 0,
-        //   duration: 2,
-        //   ease: "power2.out",
-        // })
-        // .to(
-        //   whatCardsRef.current,
-        //   {
-        //     opacity: 1,
-        //     y: 0,
-        //     duration: 2,
-        //     ease: "power2.out",
-        //   },
-        //   "-=1"
-        // ) // Start cards before heading finishes
-        // .to({}, { duration: 3 }) // Pause to let users read
+            })
+            .to(
+              whyCardsRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=1"
+            ) // Start cards before heading finishes
+            .to({}, { duration: 3 }) // Pause to let users read
 
-        // // Fourth: "Our Partners" section
-        // .to(partnersHeadingRef.current, {
-        //   opacity: 1,
-        //   x: 0,
-        //   duration: 2,
-        //   ease: "power2.out",
-        // })
-        // .to(
-        //   partnersGridRef.current,
-        //   {
-        //     opacity: 1,
-        //     y: 0,
-        //     duration: 2,
-        //     ease: "power2.out",
-        //   },
-        //   "-=1"
-        // ) // Start grid before heading finishes
-        // .to({}, { duration: 5 }); // Final pause
-      },
-    });
+            .to(whyHeadingRef.current, {
+              opacity: 0.5,
+              y: "-=100vh",
+              duration: 2,
+              ease: "power2.in",
+            })
+            .to(
+              whyCardsRef.current,
+              {
+                opacity: 0.5,
+                y: "-=100vh",
+                duration: 2,
+                ease: "power2.in",
+              },
+              "-=2"
+            ) // Start cards before heading finishes
+            .to(whySectionRef.current, {
+              zIndex: -1,
+              duration: 0,
+            })
+            .to(
+              whatSectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(
+              whatHeadingRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=1"
+            )
+            .to(
+              whatCardsRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=1" // Start cards before heading finishes
+            )
+            .to({}, { duration: 3 }) // Pause to let users read
+            .to(whatSectionRef.current, {
+              zIndex: -1,
+              duration: 0,
+            })
+            .to(whatHeadingRef.current, {
+              opacity: 0.5,
+              y: "-=100vh",
+              duration: 2,
+              ease: "power2.in",
+            })
+            .to(
+              whatCardsRef.current,
+              {
+                opacity: 0.5,
+                y: "-=100vh",
+                duration: 2,
+                ease: "power2.in",
+              },
+              "-=2"
+            ) // Start cards before heading finishes
+            .to({}, { duration: 3 })
+            .addLabel("partnersSection", "+=5") // Add a label for the Partners section
+            .to(
+              partnersSectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(
+              [partnersTitleRef.current, partnerChainRef.current],
+              {
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=3"
+            )
+            .to({}, { duration: 5 }) // Pause to let users read
+          // .to(whatHeadingRef.current, {
+          //   opacity: 1,
+          //   x: 0,
+          //   duration: 2,
+          //   ease: "power2.out",
+          // })
+          // .to(
+          //   whatCardsRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // ) // Start cards before heading finishes
+          // .to({}, { duration: 3 }) // Pause to let users read
+
+          // // Fourth: "Our Partners" section
+          // .to(partnersHeadingRef.current, {
+          //   opacity: 1,
+          //   x: 0,
+          //   duration: 2,
+          //   ease: "power2.out",
+          // })
+          // .to(
+          //   partnersGridRef.current,
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // ) // Start grid before heading finishes
+          // .to({}, { duration: 5 }); // Final pause
+        },
+      }
+    );
 
     return () => {
       // Cleanup animations
@@ -771,11 +754,13 @@ function Hero() {
           whyCardsRef={whyCardsRef}
           whatHeadingRef={whatHeadingRef}
           whatCardsRef={whatCardsRef}
-          partnersHeadingRef={partnersHeadingRef}
-          partnersGridRef={partnersGridRef}
           whySectionRef={whySectionRef}
-          whatSectionRef={whatSectionRef} 
-          partnersSectionRef={partnersSectionRef}
+          whatSectionRef={whatSectionRef}
+        />
+        <Partners
+          partnerSectionRef={partnersSectionRef}
+          partnerChainRef={partnerChainRef}
+          partnerTitleRef={partnersTitleRef}
         />
       </section>
     </>

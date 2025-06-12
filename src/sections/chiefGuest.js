@@ -17,7 +17,7 @@ function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSect
               <div className={styles.imageWrapper}>
                 <Image
                   width={200} 
-                  height={200}
+                  height={170}
                   src="/img/hoomans/cheif-minister.png"
                   alt="Shri Pinarayi Vijayan"
                   className={styles.guestImage}
@@ -37,7 +37,7 @@ function Chief({ topTitleRef, bottomTitleRef, chiefMinisterRef, ceoRef,chiefSect
               <div className={styles.imageWrapper}>
                 <Image
                   width={200}
-                  height={200}
+                  height={170}
                   src="/img/hoomans/ceo-ksum.png"
                   alt="Anoop Ambika"
                   className={styles.guestImage}
