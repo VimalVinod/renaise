@@ -263,7 +263,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              "-=3"
+              "-=2"
             )
             .to({}, { duration: 3 })
             .to(textContainerRefForAbout.current, {
@@ -357,7 +357,7 @@ function Hero() {
                 duration: 1,
                 ease: "power2.in",
               },
-              "-=12"
+              "-=10"
             )
             .to(
               momentsSectionRef.current,
