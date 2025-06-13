@@ -298,9 +298,9 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              "-=2"
+              "-=4"
             ) // Start this 2 seconds before the end of the previous animation
-            .to({}, { duration: 5 })
+            .to({}, { duration: 3 })
             .to(
               textContainerRefForAbout.current,
               {
@@ -330,7 +330,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              "-=3"
+              "-=2"
             )
             .to(
               scopeSubtitleRef.current,
