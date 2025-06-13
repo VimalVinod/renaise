@@ -541,7 +541,7 @@ function Hero() {
             //   },
             //   "-=2"
             // )
-            .addLabel("sponsorSection", "+=7") // Add a label for the Sponsor section
+            .addLabel("sponsorSection", "+=5") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
