@@ -320,15 +320,12 @@ function Hero() {
               duration: 3,
               ease: "power2.out",
             })
-            .to(
-              timeLineTitleRef.current,
-              {
-                y: "-50vh",
-                opacity: 0.3,
-                duration: 3,
-                ease: "power2.in",
-              },
-            )
+            .to(timeLineTitleRef.current, {
+              y: "-50vh",
+              opacity: 0.3,
+              duration: 3,
+              ease: "power2.in",
+            })
             // Timeline line grows slowly throughout the entire scroll
             .fromTo(
               timelineLineRef.current,
@@ -342,7 +339,7 @@ function Hero() {
               },
               "-=5"
             )
-            
+
             // Animate all cards in the array together
             .to(
               timelineContainerRef.current,
@@ -353,11 +350,15 @@ function Hero() {
               },
               "-=20"
             )
-            .to(timelineLineRef.current, {
-              y: "-=50vh",
-              duration: 2,
-              ease: "power2.in",
-            },(isMobile?"-=9.55":"-=10"))
+            .to(
+              timelineLineRef.current,
+              {
+                y: "-=50vh",
+                duration: 2.5,
+                ease: "power2.in",
+              },
+              "-=10"
+            )
             .to(
               momentsSectionRef.current,
               {
@@ -374,7 +375,7 @@ function Hero() {
                 zIndex: 100,
                 duration: 0,
               },
-              (isMobile ? "-=6" : "-=8")
+              isMobile ? "-=6" : "-=8"
             ) // Add a label for the Scope section
             .to(
               scopeTitleRef.current,
@@ -384,7 +385,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              (isMobile ? "-=5" : "-=6")
+              isMobile ? "-=5" : "-=6"
             )
             .to(
               scopeSubtitleRef.current,
@@ -394,7 +395,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              (isMobile ? "-=5" : "-=6")
+              isMobile ? "-=5" : "-=6"
             )
             .to(
               cardsContainerRef.current,
@@ -405,7 +406,7 @@ function Hero() {
                 duration: 3,
                 ease: "power2.out",
               },
-              (isMobile ? "-=5" : "-=6")
+              isMobile ? "-=5" : "-=6"
             )
             .to({}, { duration: 5 })
             .to(scopeSectionRef.current, {
