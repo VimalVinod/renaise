@@ -37,7 +37,8 @@ function About({
           Empowering
         </h1>
         <h1 className={styles.textWords} style={{ color: "var(--color-red)" }}>
-          Innovation <div
+          Innovation{" "}
+          <div
             src="/img/logo.svg"
             alt="Renaise Logo"
             width={100}

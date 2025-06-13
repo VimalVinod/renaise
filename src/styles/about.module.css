@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 100vh;
   display: flex;
+    flex-direction: column;
   justify-content: center;
   align-items: center;
   /* background-color: var(--color-navy); */
@@ -11,24 +12,22 @@
     top: 0;
     left: 0;
   overflow: hidden;
-  
+  transition: all 0.3s ease-out;
 }
 
 .textContainer {
-    position: absolute;
-    top: 50vh;
-    left: 50%;
-    transform: translate(-50%, 50vh);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     /* flex-wrap: wrap; */
+    transform: translateY(100vh);
     z-index: 2;
     font-size: 3rem;
     gap:20px;
     opacity: 0;
 }
+
 
 .textWords{    
     color: var(--text-primary);
@@ -54,11 +53,9 @@
 
 
 .secondaryTextContainer{
-    position: absolute;
-    top: 60vh;
     color: var(--text-primary);
-    left: 50%;
-    transform: translate(-50%, 50vh);
+    transform: translateY(100vh);
+    width: 70vw;
     font-size: 1.5rem;
     font-family: "Satoshi", sans-serif;
     text-align: left;

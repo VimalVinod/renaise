@@ -186,7 +186,7 @@ function Hero() {
             scrollTrigger: {
               trigger: heroRef.current,
               start: "top top",
-              end: "+=15000vh",
+              end: "+=10000vh",
               scrub: 1.5,
               pin: true,
               // markers: true, // Set to true for debugging
@@ -236,34 +236,32 @@ function Hero() {
               },
               0
             )
-            .addLabel("heroSection", "+=3") // Add a label for the Hero section
+            .addLabel("heroSection", "+=0") // Add a label for the Hero section
             .to(
               mainContentRef.current,
               {
                 opacity: 1,
                 x: 0,
-                duration: 5,
+                duration: 3,
                 ease: "power2.inOut",
               },
               0
             )
-            .to({}, { duration: 5 })
+            .to({}, { duration: 3 })
             .to(
               mainContentRef.current,
               {
                 x: "-=100vw",
                 opacity: 0,
-                duration: 5,
+                duration: 3,
                 ease: "power2.in",
-              },
-              "-=2" // Start this 2 seconds before the end of the previous animation
+              }
             )
-            .to({}, { duration: 3 })
             .addLabel("aboutSection", "+=7") // Add a label for the About section
             .to(
               textContainerRefForAbout.current,
               {
-                y: "-50%",
+                y: "15vh",
                 fontSize: isMobile ? "1.8rem" : "4rem",
                 opacity: 1,
                 duration: 3,
@@ -273,8 +271,8 @@ function Hero() {
             )
             .to({}, { duration: 3 })
             .to(textContainerRefForAbout.current, {
-              y: isMobile ? "-=100%" : "-=50%",
-              x: isMobile ? "-=6%" : "-=20vw",
+              y: isMobile ? "-=20vh" : "-=15vh",
+              x: isMobile ? 0 : "-=24vw",
               fontSize: isMobile ? "1.8rem" : "2rem",
               justifyContent: "flex-start",
               duration: 3,
@@ -291,11 +289,12 @@ function Hero() {
               },
               "-=3"
             ) // Animate the boxes to disappear 2 seconds before the end of the previous animation
+            
             .to(
               secondaryTextRefForAbout.current,
               {
-                y: isMobile ? "-13vh" : 0,
-                x: isMobile ? "-=5%" : "-=30%",
+                y: "5vh",
+                //x: isMobile ? "-=6vw" : "-=5vw",
                 duration: 3,
                 ease: "power2.out",
               },
@@ -322,7 +321,6 @@ function Hero() {
               },
               "-=2"
             )
-            .to({}, { duration: 5 })
             .addLabel("scopeSection", "+=3") // Add a label for the Scope section
             .to(
               scopeTitleRef.current,
