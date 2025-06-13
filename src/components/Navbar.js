@@ -2,6 +2,14 @@ import React, { forwardRef } from "react";
 import styles from "@styles/navbar.module.css";
 import Image from "next/image";
 
+const sections = [
+  { id: "aboutSection", label: "About" },
+  { id: "momentsSection", label: "Moments" },
+  { id: "scopeSection", label: "Scope" },
+  // { id: "chiefSection", label: "Chief Guest" },
+  { id: "sponsorSection", label: "Sponsorship" },
+];
+
 const Navbar = forwardRef(
   (
     {
@@ -13,6 +21,11 @@ const Navbar = forwardRef(
     },
     ref
   ) => {
+    const openSection = (sectionId) => {
+      closeMobileMenu();
+      scrollToSection(sectionId);
+    };
+
     return (
       <>
         <nav ref={ref} className={styles.navbar}>
@@ -28,31 +41,18 @@ const Navbar = forwardRef(
             />
 
             <div className={styles.navMenu}>
-              <a
-                className={styles.navItem}
-                onClick={() => scrollToSection("aboutSection")}
-              >
-                About
-              </a>
-              <a className={styles.navItem}>Moments</a>
-              <a
-                className={styles.navItem}
-                onClick={() => scrollToSection("scopeSection")}
-              >
-                Scope
-              </a>
-              <a
-                className={styles.navItem}
-                onClick={() => scrollToSection("chiefSection")}
-              >
-                Chief Guest
-              </a>
-              <a
-                className={styles.navItem}
-                onClick={() => scrollToSection("sponsorSection")}
-              >
-                Sponsorship
-              </a>
+              {sections.map((section, index) => (
+                <a
+                  key={index}
+                  className={styles.navItem}
+                  onClick={() => {
+                    closeMobileMenu();
+                    scrollToSection(section.id);
+                  }}
+                >
+                  {section.label}
+                </a>
+              ))}
             </div>
 
             <button className={styles.registerBtn}>Register Now</button>
@@ -84,52 +84,15 @@ const Navbar = forwardRef(
               <div className={styles.mobileMenuHeader}>
                 <span className={styles.mobileMenuTitle}>Menu</span>
               </div>
-
-              <a
-                className={styles.mobileNavItem}
-                onClick={() => {
-                  closeMobileMenu();
-                  scrollToSection("aboutSection");
-                }}
-              >
-                About
-              </a>
-              <a
-                className={styles.mobileNavItem}
-                onClick={() => {
-                  closeMobileMenu();
-                }}
-              >
-                Moments
-              </a>
-              <a
-                className={styles.mobileNavItem}
-                onClick={() => {
-                  closeMobileMenu();
-                  scrollToSection("scopeSection");
-                }}
-              >
-                Scope
-              </a>
-              <a
-                className={styles.mobileNavItem}
-                onClick={() => {
-                  closeMobileMenu();
-                  scrollToSection("chiefSection");
-                }}
-              >
-                Chief Guest
-              </a>
-              <a
-                className={styles.mobileNavItem}
-                onClick={() => {
-                  closeMobileMenu();
-                  scrollToSection("sponsorSection");
-                }}
-              >
-                Sponsorship
-              </a>
-
+              {sections.map((section, index) => (
+                <a
+                  key={index}
+                  className={styles.mobileNavItem}
+                  onClick={() => openSection(section.id)}
+                >
+                  {section.label}
+                </a>
+              ))}
               <div className={styles.mobileRegisterContainer}>
                 <button
                   className={styles.mobileRegisterBtn}
