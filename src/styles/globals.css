@@ -75,7 +75,7 @@
 html,
 body {
   height: 100vh;
-  font-family: "Velourist", sans-serif;
+  font-family: "Satoshi", sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   scroll-behavior: smooth;

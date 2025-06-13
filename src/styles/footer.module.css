@@ -36,7 +36,7 @@
 }
 
 .tagline {
-  font-family: 'Velourist', sans-serif;
+  font-family: 'Satoshi', sans-serif;
   color: var(--color-pink);
   font-size: 1.2rem;
   margin-top: 0.5rem;
@@ -98,7 +98,7 @@
 }
 
 .columnTitle {
-  font-family: 'Velourist', sans-serif;
+  font-family: 'Satoshi', sans-serif;
   color: var(--color-teal);
   margin-bottom: 1rem;
   font-size: 1.1rem;

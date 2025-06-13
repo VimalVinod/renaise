@@ -399,104 +399,104 @@ function Hero() {
               },
               "-=2"
             )
-            .addLabel("chiefSection", "+=5") // Add a label for the Chief section
-            .to(
-              topTitleRef.current,
-              {
-                x: "-10vw",
-                opacity: 1,
-                duration: 3,
-                ease: "power2.out",
-              },
-              "-=1"
-            )
-            .to(
-              bottomTitleRef.current,
-              {
-                x: isMobile ? "10vw" : 0,
-                opacity: 1,
-                duration: 3,
-                ease: "power2.out",
-              },
-              "-=1"
-            )
-            .to(
-              chiefSectionRef.current,
-              {
-                zIndex: 100,
-                duration: 0,
-              },
-              "-=3"
-            )
-            .to(
-              chiefMinisterRef.current,
-              {
-                y: isMobile ? "25vh" : 0,
-                x: isMobile ? "-20vw" : "-10vw",
-                rotateY: 15,
-                opacity: 1,
-                duration: 3,
-                stagger: 0.5,
-                ease: "power2.out",
-              },
-              "-=2"
-            )
-            .to(
-              ceoRef.current,
-              {
-                opacity: 1,
-                y: isMobile ? "20vh" : 0,
-                x: isMobile ? "20vw" : "10vw",
-                rotateY: -15,
-                duration: 5,
-                stagger: 0.5,
-                ease: "power2.out",
-              },
-              "-=3"
-            )
-            .to({}, { duration: 5 })
-            .to(chiefSectionRef.current, {
-              zIndex: -1,
-              duration: 0,
-            })
-            .to(bottomTitleRef.current, {
-              x: "+=50vw",
-              opacity: 0,
-              duration: 3,
-              ease: "power2.in",
-            })
-            .to(
-              topTitleRef.current,
-              {
-                x: "+=50vw",
-                opacity: 0,
-                duration: 3,
-                ease: "power2.in",
-              },
-              "-=2"
-            )
-            .to(
-              chiefMinisterRef.current,
-              {
-                y: "-=50vh",
-                x: "+=50vw",
-                opacity: 0,
-                duration: 3,
-                ease: "power2.in",
-              },
-              "-=3"
-            )
-            .to(
-              ceoRef.current,
-              {
-                y: "+=50vh",
-                x: "-=50vw",
-                opacity: 0,
-                duration: 3,
-                ease: "power2.in",
-              },
-              "-=2"
-            )
+            // .addLabel("chiefSection", "+=5") // Add a label for the Chief section
+            // .to(
+            //   topTitleRef.current,
+            //   {
+            //     x: "-10vw",
+            //     opacity: 1,
+            //     duration: 3,
+            //     ease: "power2.out",
+            //   },
+            //   "-=1"
+            // )
+            // .to(
+            //   bottomTitleRef.current,
+            //   {
+            //     x: isMobile ? "10vw" : 0,
+            //     opacity: 1,
+            //     duration: 3,
+            //     ease: "power2.out",
+            //   },
+            //   "-=1"
+            // )
+            // .to(
+            //   chiefSectionRef.current,
+            //   {
+            //     zIndex: 100,
+            //     duration: 0,
+            //   },
+            //   "-=3"
+            // )
+            // .to(
+            //   chiefMinisterRef.current,
+            //   {
+            //     y: isMobile ? "25vh" : 0,
+            //     x: isMobile ? "-20vw" : "-10vw",
+            //     rotateY: 15,
+            //     opacity: 1,
+            //     duration: 3,
+            //     stagger: 0.5,
+            //     ease: "power2.out",
+            //   },
+            //   "-=2"
+            // )
+            // .to(
+            //   ceoRef.current,
+            //   {
+            //     opacity: 1,
+            //     y: isMobile ? "20vh" : 0,
+            //     x: isMobile ? "20vw" : "10vw",
+            //     rotateY: -15,
+            //     duration: 5,
+            //     stagger: 0.5,
+            //     ease: "power2.out",
+            //   },
+            //   "-=3"
+            // )
+            // .to({}, { duration: 5 })
+            // .to(chiefSectionRef.current, {
+            //   zIndex: -1,
+            //   duration: 0,
+            // })
+            // .to(bottomTitleRef.current, {
+            //   x: "+=50vw",
+            //   opacity: 0,
+            //   duration: 3,
+            //   ease: "power2.in",
+            // })
+            // .to(
+            //   topTitleRef.current,
+            //   {
+            //     x: "+=50vw",
+            //     opacity: 0,
+            //     duration: 3,
+            //     ease: "power2.in",
+            //   },
+            //   "-=2"
+            // )
+            // .to(
+            //   chiefMinisterRef.current,
+            //   {
+            //     y: "-=50vh",
+            //     x: "+=50vw",
+            //     opacity: 0,
+            //     duration: 3,
+            //     ease: "power2.in",
+            //   },
+            //   "-=3"
+            // )
+            // .to(
+            //   ceoRef.current,
+            //   {
+            //     y: "+=50vh",
+            //     x: "-=50vw",
+            //     opacity: 0,
+            //     duration: 3,
+            //     ease: "power2.in",
+            //   },
+            //   "-=2"
+            // )
             .addLabel("sponsorSection", "+=7") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
