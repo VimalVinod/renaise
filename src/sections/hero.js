@@ -354,10 +354,10 @@ function Hero() {
               timelineLineRef.current,
               {
                 y: "-=50vh",
-                duration: 2,
+                duration: 1,
                 ease: "power2.in",
               },
-              "-=10"
+              "-=12"
             )
             .to(
               momentsSectionRef.current,
