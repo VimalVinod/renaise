@@ -337,7 +337,7 @@ function Hero() {
                 duration: 20, // Much longer so it grows slowly across the whole timeline
                 ease: "power2.inOut",
               },
-              "-=3"
+              "-=4"
             )
 
             // Animate all cards in the array together
