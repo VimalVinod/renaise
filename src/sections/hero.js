@@ -321,7 +321,7 @@ function Hero() {
               ease: "power2.out",
             })
             .to(timeLineTitleRef.current, {
-              y: "-50vh",
+              y: "-=50vh",
               opacity: 0.3,
               duration: 3,
               ease: "power2.in",
@@ -337,7 +337,7 @@ function Hero() {
                 duration: 20, // Much longer so it grows slowly across the whole timeline
                 ease: "power2.inOut",
               },
-              "-=5"
+              "-=3"
             )
 
             // Animate all cards in the array together
