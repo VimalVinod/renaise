@@ -367,7 +367,7 @@ function Hero() {
               },
               "-=2"
             )
-            .addLabel("scopeSection", "+=3")
+            .addLabel("scopeSection", "+=0")
             .to(
               scopeSectionRef.current,
               {
