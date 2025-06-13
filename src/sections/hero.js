@@ -353,7 +353,7 @@ function Hero() {
               timelineLineRef.current,
               {
                 y: "-=50vh",
-                duration: 1,
+                duration: 1.5,
                 ease: "power2.in",
               },
               "-=10"
