@@ -16,7 +16,6 @@ import Chief from "@sections/chiefGuest"; // Import the Chief component\
 import Sponsor from "@sections/sponsor"; // Import the Sponsor component
 import Partners from "@sections/partners"; // Import the Partners component
 import Moments from "@sections/moments"; // Import the Moments component
-import { time } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
