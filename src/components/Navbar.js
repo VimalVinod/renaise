@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const sections = [
   { id: "aboutSection", label: "About" },
-  { id: "momentsSection", label: "Moments" },
+  { id: "momentsSection", label: "Milestones" },
   { id: "scopeSection", label: "Scope" },
   // { id: "chiefSection", label: "Chief Guest" },
   { id: "sponsorSection", label: "Sponsorship" },

@@ -16,3 +16,10 @@
   color: var(--text-light);
   z-index: 3;
 }
+
+.sparkie{
+  width:100px;
+  height: auto;
+  position: absolute;
+  z-index: 2000;
+}

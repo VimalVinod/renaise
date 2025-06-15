@@ -19,7 +19,7 @@ import Moments from "@sections/moments"; // Import the Moments component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function Hero() {
+function Hero({scrollToSectionRef}) {
   const logoRef = useRef(null);
   const taglineRef = useRef(null);
   const heroRef = useRef(null);
@@ -101,8 +101,8 @@ function Hero() {
 
     gsap.to(window, {
       scrollTo: { y: scrollTo },
-      duration: 1,
-      ease: "power2.inOut",
+      duration: 0,
+      //ease: "linear",
     });
   }
 
@@ -123,6 +123,10 @@ function Hero() {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = "auto"; // Re-enable scrolling
   };
+
+  useEffect(() => {
+    scrollToSectionRef(scrollToSection);
+  }, [scrollToSectionRef]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -252,7 +256,7 @@ function Hero() {
               duration: 3,
               ease: "power2.in",
             })
-            .addLabel("aboutSection", "+=5") // Add a label for the About section
+            .addLabel("aboutSection", "+=6") // Add a label for the About section
             .to(
               textContainerRefForAbout.current,
               {
@@ -313,7 +317,7 @@ function Hero() {
               "-=2"
             )
 
-            .addLabel("momentsSection", "+=0")
+            .addLabel("momentsSection", "-=0.5")
             .to(momentsSectionRef.current, {
               y: 0,
               duration: 3,
@@ -367,7 +371,7 @@ function Hero() {
               },
               "-=2"
             )
-            .addLabel("scopeSection", "+=0")
+            .addLabel("scopeSection", "-=2")
             .to(
               scopeSectionRef.current,
               {
@@ -541,7 +545,7 @@ function Hero() {
             //   },
             //   "-=2"
             // )
-            .addLabel("sponsorSection", "+=5") // Add a label for the Sponsor section
+            .addLabel("sponsorSection", "-=1") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
@@ -697,7 +701,7 @@ function Hero() {
 
   return (
     <>
-      <section ref={heroRef} className={styles.heroContainer}>
+      <section ref={heroRef} className={styles.heroContainer} id="hero">
         {" "}
         {/* Removed aboutStyles.container */}
         <Navbar

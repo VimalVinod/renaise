@@ -76,8 +76,7 @@
   transform: translateX(-50%);
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent-primary), var(--color-orange));
-  border-radius: 2px;
+  background: var(--color-orange);
 }
 
 .cardsGrid {

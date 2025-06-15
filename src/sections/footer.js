@@ -9,13 +9,13 @@ import {
   FaLinkedinIn,
   FaTwitter,
   FaDownload,
-  FaUsers,
-  FaWhatsapp,
   FaArrowRight,
   FaHeart,
 } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = ({ scrollToSectionRef }) => {
+  const scrollToSection = (sectionId) => scrollToSectionRef.current(sectionId);
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
@@ -83,22 +83,47 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <div className={styles.mapSection}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.942666130125!2d76.61491067450164!3d9.317330584410042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0622ea027eb08f%3A0x41105b207db821c6!2sCollege%20of%20Engineering%20Chengannur!5e1!3m2!1sen!2sin!4v1749993520519!5m2!1sen!2sin"
+            className={styles.mapFrame}
+            title="College of Engineering Chengannur Location"
+            allowFullScreen=""
+            aria-hidden="false"
+            tabIndex="0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
 
         <div className={styles.bottomSection}>
           <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Navigation</h3>
-            <Link href="/about" className={styles.footerLink}>
+            <a
+              onClick={() => scrollToSection("aboutSection")}
+              className={styles.footerLink}
+            >
               About IEDC
-            </Link>
-            <Link href="/timeline" className={styles.footerLink}>
-              Timeline / Journey
-            </Link>
-            <Link href="/gallery" className={styles.footerLink}>
-              Gallery / Moments
-            </Link>
-            <Link href="/schedule" className={styles.footerLink}>
-              Event Schedule
-            </Link>
+            </a>
+
+            <a
+              onClick={() => scrollToSection("momentsSection")}
+              className={styles.footerLink}
+            >
+              Milestones
+            </a>
+            <a
+              onClick={() => scrollToSection("scopeSection")}
+              className={styles.footerLink}
+            >
+              Scope of Event
+            </a>
+            <a
+              onClick={() => scrollToSection("sponsorSection")}
+              className={styles.footerLink}
+            >
+              Sponsorship
+            </a>
           </div>
           <div className={styles.actionColumn}>
             <h3 className={styles.columnTitle}>Quick Actions</h3>
@@ -108,20 +133,6 @@ const Footer = () => {
             >
               <FaArrowRight size={14} /> Register for ReNaise
             </Link>
-            <Link
-              href="/volunteer"
-              className={`${styles.footerLink} ${styles.actionLink}`}
-            >
-              <FaUsers size={14} /> Volunteer
-            </Link>
-            <a
-              href="https://chat.whatsapp.com/your-whatsapp-group-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.footerLink} ${styles.actionLink}`}
-            >
-              <FaWhatsapp size={14} /> Join WhatsApp Group
-            </a>
             <a
               href="/brochure.pdf"
               download
