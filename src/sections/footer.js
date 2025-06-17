@@ -150,7 +150,7 @@ const Footer = ({ scrollToSectionRef }) => {
             <span className={styles.heart}>
               <FaHeart size={14} color="red" />
             </span>{" "}
-            by deelu
+            by betmen
           </p>
         </div>
 

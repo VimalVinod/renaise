@@ -38,11 +38,11 @@ export default function Home() {
   const scrollToSectionRef = React.useRef(null);
   const [loadFooter, setLoadFooter] = React.useState(false);
 
-  const addToRef = (ref) => scrollToSectionRef.current = ref;
+  const addToRef = (ref) => (scrollToSectionRef.current = ref);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    setLoadFooter(true);
+    setTimeout(()=>setLoadFooter(true), 500);
     document.documentElement.style.overflow = "hidden";
 
     return () => {
@@ -70,8 +70,12 @@ export default function Home() {
       <div className={styles.container}>
         <Hero scrollToSectionRef={addToRef} />
       </div>
-      <HowToReach />
-      {loadFooter && <Footer scrollToSectionRef={scrollToSectionRef} />}
+      {loadFooter && (
+        <>
+          <HowToReach />
+          <Footer scrollToSectionRef={scrollToSectionRef} />
+        </>
+      )}
     </>
   );
 }

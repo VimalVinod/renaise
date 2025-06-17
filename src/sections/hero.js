@@ -317,7 +317,7 @@ function Hero({scrollToSectionRef}) {
               "-=2"
             )
 
-            .addLabel("momentsSection", "-=0.5")
+            .addLabel("momentsSection", "-=3")
             .to(momentsSectionRef.current, {
               y: 0,
               duration: 3,
@@ -371,7 +371,7 @@ function Hero({scrollToSectionRef}) {
               },
               "-=2"
             )
-            .addLabel("scopeSection", "-=2")
+            .addLabel("scopeSection", "-=6")
             .to(
               scopeSectionRef.current,
               {
@@ -545,7 +545,7 @@ function Hero({scrollToSectionRef}) {
             //   },
             //   "-=2"
             // )
-            .addLabel("sponsorSection", "-=1") // Add a label for the Sponsor section
+            .addLabel("sponsorSection", "-=7") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
