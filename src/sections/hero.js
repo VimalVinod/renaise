@@ -352,7 +352,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               "-=2"
             )
             .to({}, { duration: 3 }) // Pause to let users read
-            .to([whatSectionContentRef.current,whatSectionTitleRef.current], {
+            .to([whatSectionContentRef.current, whatSectionTitleRef.current], {
               y: isMobile ? "-=20vh" : "0",
               duration: 3,
               ease: "power2.out",
@@ -362,12 +362,16 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               zIndex: -1,
               duration: 0,
             })
-            .to(whatSectionTitleRef.current, {
-              opacity: 0.5,
-              x: "-=100vw",
-              duration: 2,
-              ease: "power2.in",
-            }, "-=2")
+            .to(
+              whatSectionTitleRef.current,
+              {
+                opacity: 0.5,
+                x: "-=100vw",
+                duration: 2,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
             .to(
               whatSectionContentRef.current,
               {
@@ -379,7 +383,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               },
               "-=1"
             ) // Start cards before heading finishes
-            
+
             .addLabel("scopeSection", "+=3")
             .to(
               scopeSectionRef.current,
