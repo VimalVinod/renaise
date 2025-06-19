@@ -66,6 +66,7 @@
     .logoImageBox {
         width: 70px;
         height: 70px;
+        border-radius: calc(70px / 4);
     }
 
     .textContainer {
