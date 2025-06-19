@@ -42,7 +42,6 @@ export default function Home() {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    setTimeout(()=>setLoadFooter(true), 500);
     document.documentElement.style.overflow = "hidden";
 
     return () => {
@@ -68,12 +67,19 @@ export default function Home() {
     <>
       <Blob />
       <div className={styles.container}>
-        <Hero scrollToSectionRef={addToRef} />
+        <Hero
+          scrollToSectionRef={addToRef}
+          start={() => setLoadFooter(true)}
+          end={() => setLoadFooter(false)}
+        />
       </div>
       {loadFooter && (
         <>
           <HowToReach />
-          <Footer scrollToSectionRef={scrollToSectionRef} />
+          <Footer
+            scrollToSectionRef={scrollToSectionRef}
+            hasStarted={true}
+          />
         </>
       )}
     </>

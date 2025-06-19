@@ -19,7 +19,7 @@ import Moments from "@sections/moments"; // Import the Moments component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function Hero({scrollToSectionRef}) {
+function Hero({scrollToSectionRef,start,end}) {
   const logoRef = useRef(null);
   const taglineRef = useRef(null);
   const heroRef = useRef(null);
@@ -256,7 +256,7 @@ function Hero({scrollToSectionRef}) {
               duration: 3,
               ease: "power2.in",
             })
-            .addLabel("aboutSection", "+=6") // Add a label for the About section
+            .addLabel("aboutSection", "+=7") // Add a label for the About section
             .to(
               textContainerRefForAbout.current,
               {
@@ -317,7 +317,7 @@ function Hero({scrollToSectionRef}) {
               "-=2"
             )
 
-            .addLabel("momentsSection", "-=3")
+            .addLabel("momentsSection", "+=1")
             .to(momentsSectionRef.current, {
               y: 0,
               duration: 3,
@@ -371,7 +371,7 @@ function Hero({scrollToSectionRef}) {
               },
               "-=2"
             )
-            .addLabel("scopeSection", "-=6")
+            .addLabel("scopeSection", "+=3")
             .to(
               scopeSectionRef.current,
               {
@@ -545,7 +545,7 @@ function Hero({scrollToSectionRef}) {
             //   },
             //   "-=2"
             // )
-            .addLabel("sponsorSection", "-=7") // Add a label for the Sponsor section
+            .addLabel("sponsorSection", "+=3") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
@@ -620,7 +620,7 @@ function Hero({scrollToSectionRef}) {
             .to(whySectionRef.current, {
               zIndex: -1,
               duration: 0,
-            })
+            }).call(end)
             .to(
               whatSectionRef.current,
               {
@@ -639,6 +639,7 @@ function Hero({scrollToSectionRef}) {
               },
               "-=1"
             )
+            .call(start)
             .to(
               whatCardsRef.current,
               {
@@ -650,41 +651,43 @@ function Hero({scrollToSectionRef}) {
               "-=2" // Start cards before heading finishes
             )
             .to({}, { duration: 5 }) // Pause to let users read
-            .to(whatSectionRef.current, {
-              zIndex: -1,
-              duration: 0,
-            })
-            .to(whatHeadingRef.current, {
-              opacity: 0.5,
-              y: "-=100vh",
-              duration: 2,
-              ease: "power2.in",
-            })
-            .to(
-              whatCardsRef.current,
-              {
-                opacity: 0.5,
-                y: "-=100vh",
-                duration: 2,
-                ease: "power2.in",
-              },
-              "-=2"
-            )
-            .addLabel("partnersSection", "+=5") // Add a label for the Partners section
-            .to(partnersSectionRef.current, {
-              zIndex: 100,
-              duration: 0,
-            }) // Start this 2 seconds before the end of the previous animation
-            .to(
-              [partnersTitleRef.current, partnerChainRef.current],
-              {
-                y: 0,
-                duration: 2,
-                ease: "power2.out",
-              },
-              "-=1"
-            )
-            .to({}, { duration: 5 }); // Pause to let users read
+            // .to(whatSectionRef.current, {
+            //   zIndex: -1,
+            //   duration: 0,
+            // })
+            // .to(whatHeadingRef.current, {
+            //   opacity: 0.5,
+            //   y: "-=100vh",
+            //   duration: 2,
+            //   ease: "power2.in",
+            // }).call(end)
+            // .to(
+            //   whatCardsRef.current,
+            //   {
+            //     opacity: 0.5,
+            //     y: "-=100vh",
+            //     duration: 2,
+            //     ease: "power2.in",
+            //   },
+            //   "-=2"
+            // )
+            
+            // .addLabel("partnersSection", "+=5") // Add a label for the Partners section
+            // .to(partnersSectionRef.current, {
+            //   zIndex: 100,
+            //   duration: 0,
+            // }) // Start this 2 seconds before the end of the previous animation
+            
+            // .to(
+            //   [partnersTitleRef.current, partnerChainRef.current],
+            //   {
+            //     y: 0,
+            //     duration: 2,
+            //     ease: "power2.out",
+            //   },
+            //   "-=1"
+            // )
+            //.to({}, { duration: 5 }); // Pause to let users read
         },
       }
     );
@@ -745,13 +748,13 @@ function Hero({scrollToSectionRef}) {
           cardsContainerRef={cardsContainerRef}
           scopeSectionRef={scopeSectionRef}
         />
-        <Chief
+        {/* <Chief
           topTitleRef={topTitleRef}
           bottomTitleRef={bottomTitleRef}
           chiefMinisterRef={chiefMinisterRef}
           ceoRef={ceoRef}
           chiefSectionRef={chiefSectionRef}
-        />
+        /> */}
         <Sponsor
           sponsorSectionRef={sponsorSectionRef}
           sponsorTitleRef={sponsorTitleRef}
@@ -762,11 +765,11 @@ function Hero({scrollToSectionRef}) {
           whySectionRef={whySectionRef}
           whatSectionRef={whatSectionRef}
         />
-        <Partners
+        {/* <Partners
           partnerSectionRef={partnersSectionRef}
           partnerChainRef={partnerChainRef}
           partnerTitleRef={partnersTitleRef}
-        />
+        /> */}
         <Moments
           momentsSectionRef={momentsSectionRef}
           timelineContainerRef={addBoxToTimelineContainer}

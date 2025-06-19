@@ -13,7 +13,7 @@ import {
   FaHeart,
 } from "react-icons/fa";
 
-const Footer = ({ scrollToSectionRef }) => {
+const Footer = ({ scrollToSectionRef, hasStarted }) => {
   const scrollToSection = (sectionId) => scrollToSectionRef.current(sectionId);
 
   return (
@@ -83,17 +83,20 @@ const Footer = ({ scrollToSectionRef }) => {
             </a>
           </div>
         </div>
+
         <div className={styles.mapSection}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.942666130125!2d76.61491067450164!3d9.317330584410042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0622ea027eb08f%3A0x41105b207db821c6!2sCollege%20of%20Engineering%20Chengannur!5e1!3m2!1sen!2sin!4v1749993520519!5m2!1sen!2sin"
-            className={styles.mapFrame}
-            title="College of Engineering Chengannur Location"
-            allowFullScreen=""
-            aria-hidden="false"
-            tabIndex="0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          {hasStarted && (
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.942666130125!2d76.61491067450164!3d9.317330584410042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0622ea027eb08f%3A0x41105b207db821c6!2sCollege%20of%20Engineering%20Chengannur!5e1!3m2!1sen!2sin!4v1749993520519!5m2!1sen!2sin"
+              className={styles.mapFrame}
+              title="College of Engineering Chengannur Location"
+              allowFullScreen=""
+              aria-hidden="false"
+              tabIndex="0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          )}
         </div>
 
         <div className={styles.bottomSection}>
