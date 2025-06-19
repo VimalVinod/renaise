@@ -36,8 +36,12 @@ function spawnSparkie(x, y) {
 
 export default function Home() {
   const scrollToSectionRef = React.useRef(null);
+  
   const [loadFooter, setLoadFooter] = React.useState(false);
-
+  const startEndRef = React.useRef({
+    start: () => setLoadFooter(true),
+    end: () => setLoadFooter(false),
+  });
   const addToRef = (ref) => (scrollToSectionRef.current = ref);
 
   React.useEffect(() => {
@@ -69,8 +73,7 @@ export default function Home() {
       <div className={styles.container}>
         <Hero
           scrollToSectionRef={addToRef}
-          start={() => setLoadFooter(true)}
-          end={() => setLoadFooter(false)}
+          startEndRef={startEndRef}
         />
       </div>
       {loadFooter && (

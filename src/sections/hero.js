@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,14 +12,14 @@ import Navbar from "@components/Navbar";
 import MainContent from "@components/MainContent";
 import About from "@sections/about"; // Import the About component
 import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
-import Chief from "@sections/chiefGuest"; // Import the Chief component\
+//import Chief from "@sections/chiefGuest"; // Import the Chief component\
 import Sponsor from "@sections/sponsor"; // Import the Sponsor component
-import Partners from "@sections/partners"; // Import the Partners component
+//import Partners from "@sections/partners"; // Import the Partners component
 import Moments from "@sections/moments"; // Import the Moments component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function Hero({scrollToSectionRef,start,end}) {
+function Hero({scrollToSectionRef,startEndRef}) {
   const logoRef = useRef(null);
   const taglineRef = useRef(null);
   const heroRef = useRef(null);
@@ -316,61 +316,6 @@ function Hero({scrollToSectionRef,start,end}) {
               },
               "-=2"
             )
-
-            .addLabel("momentsSection", "+=1")
-            .to(momentsSectionRef.current, {
-              y: 0,
-              duration: 3,
-              ease: "power2.out",
-            })
-            .to(timeLineTitleRef.current, {
-              y: "-=50vh",
-              opacity: 0.3,
-              duration: 3,
-              ease: "power2.in",
-            })
-            // Timeline line grows slowly throughout the entire scroll
-            .fromTo(
-              timelineLineRef.current,
-              {
-                height: "0%",
-              },
-              {
-                height: "46.5%",
-                duration: 20, // Much longer so it grows slowly across the whole timeline
-                ease: "power2.inOut",
-              },
-              "-=4"
-            )
-
-            // Animate all cards in the array together
-            .to(
-              timelineContainerRef.current,
-              {
-                y: "-380vh",
-                duration: 30, // Longer duration for all 10 cards
-                ease: "power2.inOut",
-              },
-              "-=20"
-            )
-            .to(
-              timelineLineRef.current,
-              {
-                y: "-=50vh",
-                duration: 1.5,
-                ease: "power2.in",
-              },
-              "-=10"
-            )
-            .to(
-              momentsSectionRef.current,
-              {
-                y: "-30vh",
-                duration: 2,
-                ease: "power2.in",
-              },
-              "-=2"
-            )
             .addLabel("scopeSection", "+=3")
             .to(
               scopeSectionRef.current,
@@ -378,7 +323,7 @@ function Hero({scrollToSectionRef,start,end}) {
                 zIndex: 100,
                 duration: 0,
               },
-              isMobile ? "-=6" : "-=8"
+              "-=3"
             ) // Add a label for the Scope section
             .to(
               scopeTitleRef.current,
@@ -388,7 +333,7 @@ function Hero({scrollToSectionRef,start,end}) {
                 duration: 3,
                 ease: "power2.out",
               },
-              isMobile ? "-=5" : "-=6"
+              "-=2"
             )
             .to(
               scopeSubtitleRef.current,
@@ -398,7 +343,7 @@ function Hero({scrollToSectionRef,start,end}) {
                 duration: 3,
                 ease: "power2.out",
               },
-              isMobile ? "-=5" : "-=6"
+              "-=2"
             )
             .to(
               cardsContainerRef.current,
@@ -409,7 +354,7 @@ function Hero({scrollToSectionRef,start,end}) {
                 duration: 3,
                 ease: "power2.out",
               },
-              isMobile ? "-=5" : "-=6"
+              "-=2" // Start cards before title finishes
             )
             .to({}, { duration: 5 })
             .to(scopeSectionRef.current, {
@@ -620,7 +565,7 @@ function Hero({scrollToSectionRef,start,end}) {
             .to(whySectionRef.current, {
               zIndex: -1,
               duration: 0,
-            }).call(end)
+            })
             .to(
               whatSectionRef.current,
               {
@@ -639,7 +584,6 @@ function Hero({scrollToSectionRef,start,end}) {
               },
               "-=1"
             )
-            .call(start)
             .to(
               whatCardsRef.current,
               {
@@ -651,27 +595,63 @@ function Hero({scrollToSectionRef,start,end}) {
               "-=2" // Start cards before heading finishes
             )
             .to({}, { duration: 5 }) // Pause to let users read
-            // .to(whatSectionRef.current, {
-            //   zIndex: -1,
-            //   duration: 0,
-            // })
-            // .to(whatHeadingRef.current, {
-            //   opacity: 0.5,
-            //   y: "-=100vh",
-            //   duration: 2,
-            //   ease: "power2.in",
-            // }).call(end)
-            // .to(
-            //   whatCardsRef.current,
-            //   {
-            //     opacity: 0.5,
-            //     y: "-=100vh",
-            //     duration: 2,
-            //     ease: "power2.in",
-            //   },
-            //   "-=2"
-            // )
+            .to(whatSectionRef.current, {
+              zIndex: -1,
+              duration: 0,
+            })
+            .to(whatHeadingRef.current, {
+              opacity: 0.5,
+              y: "-=100vh",
+              duration: 2,
+              ease: "power2.in",
+            })
+            .to(
+              whatCardsRef.current,
+              {
+                opacity: 0.5,
+                y: "-=100vh",
+                duration: 2,
+                ease: "power2.in",
+              },
+              "-=2"
+            )
+            .addLabel("momentsSection", "+=1")
+            .to(momentsSectionRef.current, {
+              y: 0,
+              duration: 3,
+              ease: "power2.out",
+            }).call(startEndRef.current.end) // Call start function to load footer
+            .to(timeLineTitleRef.current, {
+              y: "-=50vh",
+              opacity: 0.3,
+              duration: 3,
+              ease: "power2.in",
+            }).call(startEndRef.current.start) // Call end function to hide footer
+            // Timeline line grows slowly throughout the entire scroll
+            .fromTo(
+              timelineLineRef.current,
+              {
+                height: "0%",
+              },
+              {
+                height:isMobile?"45.5%": "44.5%",
+                duration: 20, // Much longer so it grows slowly across the whole timeline
+                ease: "power2.inOut",
+              },
+              "-=4"
+            )
             
+            // Animate all cards in the array together
+            .to(
+              timelineContainerRef.current,
+              {
+                y: "-335vh",
+                duration: 30, // Longer duration for all 10 cards
+                ease: "power2.inOut",
+              },
+              "-=20"
+            )
+             // Start this 2 seconds before the end of the previous animation
             // .addLabel("partnersSection", "+=5") // Add a label for the Partners section
             // .to(partnersSectionRef.current, {
             //   zIndex: 100,
@@ -700,7 +680,7 @@ function Hero({scrollToSectionRef,start,end}) {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = ""; // Re-enable scrolling on cleanup
     };
-  }, []);
+  }, [startEndRef]);
 
   return (
     <>

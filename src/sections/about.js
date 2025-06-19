@@ -15,8 +15,8 @@ function About({
       <div className={styles.textContainer} ref={textContainerRef}>
         <h1 className={styles.textWords}>
           A Decade
-          <div
-            src="/img/logo.svg"
+          <Image
+            src="/stuff/exodia.jpeg"
             alt="Renaise Logo"
             width={100}
             height={100}
@@ -26,8 +26,8 @@ function About({
           Of
         </h1>
         <h1 className={styles.textWords} style={{ color: "var(--color-teal)" }}>
-          <div
-            src="/img/logo.svg"
+          <Image
+            src="/stuff/empowa.jpeg"
             alt="Renaise Logo"
             width={100}
             height={100}
@@ -38,8 +38,8 @@ function About({
         </h1>
         <h1 className={styles.textWords} style={{ color: "var(--color-red)" }}>
           Innovation{" "}
-          <div
-            src="/img/logo.svg"
+          <Image
+            src="/stuff/inovo.jpeg"
             alt="Renaise Logo"
             width={100}
             height={100}

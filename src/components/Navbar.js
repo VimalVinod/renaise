@@ -4,10 +4,11 @@ import Image from "next/image";
 
 const sections = [
   { id: "aboutSection", label: "About" },
-  { id: "momentsSection", label: "Milestones" },
+
   { id: "scopeSection", label: "Scope" },
   // { id: "chiefSection", label: "Chief Guest" },
   { id: "sponsorSection", label: "Sponsorship" },
+  { id: "momentsSection", label: "Milestones" },
 ];
 
 const Navbar = forwardRef(

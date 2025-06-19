@@ -48,7 +48,7 @@
 }
 
 .primaryBtn {
-  background: #dc3545;
+  background: var(--color-red);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -61,22 +61,22 @@
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  border: 2px solid #dc3545;
+  border: 2px solid var(--color-red);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 10;
 }
 
 .primaryBtn:hover {
   background: transparent;
-  color: #dc3545;
+  color: var(--color-red);
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(220, 53, 69, 0.3);
 }
 
 .secondaryBtn {
   background: transparent;
-  color: #dc3545;
-  border: 2px solid #dc3545;
+  color: var(--color-red);
+  border: 2px solid var(--color-red);
   padding: 1rem 2rem;
   border-radius: 50px;
   font-family: 'Satoshi', sans-serif;
@@ -87,9 +87,10 @@
 }
 
 .secondaryBtn:hover {
-  background: #dc3545;
+  background: var(--color-red);
   color: white;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
 .arrow {
