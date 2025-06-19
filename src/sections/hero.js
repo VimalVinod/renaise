@@ -16,10 +16,11 @@ import ScopeOfEvent from "@sections/scope"; // Import the ScopeOfEvent component
 import Sponsor from "@sections/sponsor"; // Import the Sponsor component
 //import Partners from "@sections/partners"; // Import the Partners component
 import Moments from "@sections/moments"; // Import the Moments component
+import What from "@sections/what"; // Import the What component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function Hero({scrollToSectionRef,startEndRef}) {
+function Hero({ scrollToSectionRef, startEndRef }) {
   const logoRef = useRef(null);
   const taglineRef = useRef(null);
   const heroRef = useRef(null);
@@ -79,6 +80,11 @@ function Hero({scrollToSectionRef,startEndRef}) {
   const timelineContainerRef = useRef([]);
   const timeLineTitleRef = useRef(null);
   const timelineLineRef = useRef(null);
+
+  //refs for what section
+  const whatsectionRef = useRef(null);
+  const whatSectionTitleRef = useRef(null);
+  const whatSectionContentRef = useRef(null);
 
   const addBoxToTimelineContainer = (ref) => {
     if (!timelineContainerRef.current.includes(ref))
@@ -316,6 +322,64 @@ function Hero({scrollToSectionRef,startEndRef}) {
               },
               "-=2"
             )
+            .addLabel("whatSection", "+=3") // Add a label for the end of the About section
+            .to(
+              whatsectionRef.current,
+              {
+                zIndex: 100,
+                duration: 0,
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(
+              whatSectionTitleRef.current,
+              {
+                opacity: 1,
+                x: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to(
+              whatSectionContentRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+            .to({}, { duration: 3 }) // Pause to let users read
+            .to([whatSectionContentRef.current,whatSectionTitleRef.current], {
+              y: isMobile ? "-=20vh" : "0",
+              duration: 3,
+              ease: "power2.out",
+            })
+            .to({}, { duration: 3 }) // Pause to let users read
+            .to(whatsectionRef.current, {
+              zIndex: -1,
+              duration: 0,
+            })
+            .to(whatSectionTitleRef.current, {
+              opacity: 0.5,
+              x: "-=100vw",
+              duration: 2,
+              ease: "power2.in",
+            }, "-=2")
+            .to(
+              whatSectionContentRef.current,
+              {
+                opacity: 0.5,
+                y: "-=100vh",
+                x: "-=100vw",
+                duration: 2,
+                ease: "power2.in",
+              },
+              "-=1"
+            ) // Start cards before heading finishes
+            
             .addLabel("scopeSection", "+=3")
             .to(
               scopeSectionRef.current,
@@ -323,7 +387,7 @@ function Hero({scrollToSectionRef,startEndRef}) {
                 zIndex: 100,
                 duration: 0,
               },
-              "-=3"
+              "-=2"
             ) // Add a label for the Scope section
             .to(
               scopeTitleRef.current,
@@ -620,13 +684,15 @@ function Hero({scrollToSectionRef,startEndRef}) {
               y: 0,
               duration: 3,
               ease: "power2.out",
-            }).call(startEndRef.current.end) // Call start function to load footer
+            })
+            .call(startEndRef.current.end) // Call start function to load footer
             .to(timeLineTitleRef.current, {
               y: "-=50vh",
               opacity: 0.3,
               duration: 3,
               ease: "power2.in",
-            }).call(startEndRef.current.start) // Call end function to hide footer
+            })
+            .call(startEndRef.current.start) // Call end function to hide footer
             // Timeline line grows slowly throughout the entire scroll
             .fromTo(
               timelineLineRef.current,
@@ -634,13 +700,13 @@ function Hero({scrollToSectionRef,startEndRef}) {
                 height: "0%",
               },
               {
-                height:isMobile?"45.5%": "44.5%",
+                height: isMobile ? "45.5%" : "44.5%",
                 duration: 20, // Much longer so it grows slowly across the whole timeline
                 ease: "power2.inOut",
               },
               "-=4"
             )
-            
+
             // Animate all cards in the array together
             .to(
               timelineContainerRef.current,
@@ -650,24 +716,24 @@ function Hero({scrollToSectionRef,startEndRef}) {
                 ease: "power2.inOut",
               },
               "-=20"
-            )
-             // Start this 2 seconds before the end of the previous animation
-            // .addLabel("partnersSection", "+=5") // Add a label for the Partners section
-            // .to(partnersSectionRef.current, {
-            //   zIndex: 100,
-            //   duration: 0,
-            // }) // Start this 2 seconds before the end of the previous animation
-            
-            // .to(
-            //   [partnersTitleRef.current, partnerChainRef.current],
-            //   {
-            //     y: 0,
-            //     duration: 2,
-            //     ease: "power2.out",
-            //   },
-            //   "-=1"
-            // )
-            //.to({}, { duration: 5 }); // Pause to let users read
+            );
+          // Start this 2 seconds before the end of the previous animation
+          // .addLabel("partnersSection", "+=5") // Add a label for the Partners section
+          // .to(partnersSectionRef.current, {
+          //   zIndex: 100,
+          //   duration: 0,
+          // }) // Start this 2 seconds before the end of the previous animation
+
+          // .to(
+          //   [partnersTitleRef.current, partnerChainRef.current],
+          //   {
+          //     y: 0,
+          //     duration: 2,
+          //     ease: "power2.out",
+          //   },
+          //   "-=1"
+          // )
+          //.to({}, { duration: 5 }); // Pause to let users read
         },
       }
     );
@@ -755,6 +821,11 @@ function Hero({scrollToSectionRef,startEndRef}) {
           timelineContainerRef={addBoxToTimelineContainer}
           timeLineTitleRef={timeLineTitleRef}
           timelineLineRef={timelineLineRef}
+        />
+        <What
+          whatsectionRef={whatsectionRef}
+          whatSectionTitleRef={whatSectionTitleRef}
+          whatSectionContentRef={whatSectionContentRef}
         />
       </section>
     </>

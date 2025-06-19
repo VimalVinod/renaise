@@ -1,0 +1,274 @@
+.whatSection {
+  padding: 6rem 2rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.container {
+  max-width: 100vw;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  position: relative;
+  margin-bottom: 4rem;
+  text-align: center;
+  transform: translateX(100vw);
+  opacity: 0;
+}
+
+.title {
+  font-family: "Satoshi", sans-serif;
+  font-weight: bold;
+  font-size: 3rem;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.title span {
+  color: var(--color-teal);
+  font-family: "Satoshi", sans-serif;
+  font-weight: bold;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  background-color: var(--color-orange);
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform: translateY(100vh);
+}
+
+.description {
+  width: 100%;
+  font-family: "Satoshi", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.description p {
+  margin-bottom: 1.5rem;
+  position: relative;
+  color: var(--text-primary);
+}
+
+.highlight {
+  color: var(--color-red);
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Inline icons and information styling */
+.inlineInfo {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0.15rem 0.4rem;
+  margin: 0 0.15rem;
+  background-color: rgba(251, 251, 223, 0.7);
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.inlineInfo:hover {
+  background-color: var(--color-cream);
+}
+
+.inlineIcon {
+  font-size: 0.9rem;
+  margin-right: 0.35rem;
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+/* Medium screens */
+@media screen and (max-width: 1024px) {
+  .description {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 767px) {
+  .whatSection {
+    padding: 4rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .inlineInfo {
+    display: inline-flex;
+    padding: 0.1rem 0.3rem;
+    margin: 0 0.1rem;
+  }
+
+  .inlineIcon {
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 400px) {
+  .whatSection {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+.eventCard {
+  transition: all 0.3s ease;
+}
+
+.eventCard:hover .iconWrapper {
+  background-color: var(--color-teal);
+  color: white;
+  transform: scale(1.1);
+}
+
+.cardLabel {
+  font-family: "Satoshi", sans-serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--color-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.cardValue {
+  font-family: "Satoshi", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-primary);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Medium screens */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .eventCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 767px) {
+  .whatSection {
+    padding: 4rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .eventDetailTitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .eventCards {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+
+  .cardHeader {
+    padding: 1.25rem 1.25rem 0.5rem;
+  }
+
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+
+  .cardValue {
+    padding: 0.5rem 1.25rem 1.25rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 400px) {
+  .whatSection {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .eventDetailTitle {
+    font-size: 1.3rem;
+  }
+
+  .cardHeader {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .iconWrapper {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .cardLabel {
+    font-size: 0.8rem;
+  }
+
+  .cardValue {
+    font-size: 1rem;
+    padding: 0.5rem 1rem 1rem;
+  }
+}
+
+.factContent h4 {
+  font-size: 0.8rem;
+}
+
+.factContent p {
+  font-size: 1rem;
+}
