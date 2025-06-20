@@ -7,11 +7,12 @@ import {
   FaEnvelope,
   FaInstagram,
   FaLinkedinIn,
-  FaTwitter,
   FaDownload,
   FaArrowRight,
   FaHeart,
 } from "react-icons/fa";
+import { CiGlobe } from "react-icons/ci";
+
 
 const Footer = ({ scrollToSectionRef, hasStarted }) => {
   const scrollToSection = (sectionId) => scrollToSectionRef.current(sectionId);
@@ -53,12 +54,12 @@ const Footer = ({ scrollToSectionRef, hasStarted }) => {
             </div>
             <div className={styles.contactItem}>
               <FaEnvelope size={18} color="var(--color-teal)" />
-              <a href="mailto:iedc@ceconline.edu">iedc@ceconline.edu</a>
+              <a href="mailto:renaise@iedcbootcampcec.org">renaise@iedcbootcampcec.org</a>
             </div>
           </div>
           <div className={styles.socialLinks}>
             <a
-              href="https://instagram.com/iedc_cec"
+              href="https://instagram.com/iedcbootcampcec"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -66,7 +67,7 @@ const Footer = ({ scrollToSectionRef, hasStarted }) => {
               <FaInstagram className={styles.socialIcon} />
             </a>
             <a
-              href="https://linkedin.com/company/iedc-cec"
+              href="https://linkedin.com/company/iedc-bootcamp-cec"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -74,12 +75,12 @@ const Footer = ({ scrollToSectionRef, hasStarted }) => {
               <FaLinkedinIn className={styles.socialIcon} />
             </a>
             <a
-              href="https://twitter.com/iedc_cec"
+              href="https://www.iedcbootcampcec.org"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter"
+              aria-label="Website"
             >
-              <FaTwitter className={styles.socialIcon} />
+              <CiGlobe className={styles.socialIcon} />
             </a>
           </div>
         </div>
