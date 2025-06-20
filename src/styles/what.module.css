@@ -15,7 +15,7 @@
 
 .sectionHeader {
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   text-align: center;
   transform: translateX(100vw);
   opacity: 0;
@@ -80,7 +80,7 @@
 .desktopFactsRow {
   display: flex;
   justify-content: space-around;
-  margin: 2rem 0;
+  margin: 0;
   padding: 1.5rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
