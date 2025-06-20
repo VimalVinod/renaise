@@ -54,7 +54,7 @@ function Moments({
     {
       id: 6,
       year: 2025,
-      image: "/stuff/milestones/exodia_25.jpg",
+      image: "/stuff/milestones/exodia_25.JPG",
       title: "Exodia 2025",
       description:
         "A chance to explore cutting-edge domains like Cyber Security, Chatbot Mastery, and Robotics with IoT, empowering students with future-ready tech skills.",
