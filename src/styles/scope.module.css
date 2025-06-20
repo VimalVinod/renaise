@@ -303,6 +303,10 @@
     -ms-overflow-style: none; 
     scroll-snap-type: x mandatory;
   }
+
+  .scopeSubtitle {
+    margin-bottom:0;
+  }
   
   .cardsContainer::-webkit-scrollbar {
     display: none;  /* Chrome, Safari, Opera */

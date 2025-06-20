@@ -87,8 +87,6 @@ function Moments({
                     <Image
                       src={milestone.image}
                       alt={milestone.title}
-                      priority={index < 2} // Load first two images eagerly
-                      loading={index >= 2 ? "lazy" : "eager"}
                       width={300}
                       height={300}
                       className={styles.image}

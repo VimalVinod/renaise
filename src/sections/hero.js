@@ -667,6 +667,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               zIndex: -1,
               duration: 0,
             })
+            .call(startEndRef.current.end) // Call start function to load footer
             .to(whatHeadingRef.current, {
               opacity: 0.5,
               y: "-=100vh",
@@ -689,7 +690,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               duration: 3,
               ease: "power2.out",
             })
-            .call(startEndRef.current.end) // Call start function to load footer
+
             .to(timeLineTitleRef.current, {
               y: "-=50vh",
               opacity: 0.3,
