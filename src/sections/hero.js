@@ -704,7 +704,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
                 height: "0%",
               },
               {
-                height: isMobile ? "45.5%" : "44.5%",
+                height: "44.5%",
                 duration: 20, // Much longer so it grows slowly across the whole timeline
                 ease: "power2.inOut",
               },
@@ -715,7 +715,7 @@ function Hero({ scrollToSectionRef, startEndRef }) {
             .to(
               timelineContainerRef.current,
               {
-                y: "-335vh",
+                y: isMobile ? "-190vh" : "-175vh",
                 duration: 30, // Longer duration for all 10 cards
                 ease: "power2.inOut",
               },

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@styles/moments.module.css";
+import Image from "next/image";
 
 function Moments({
   momentsSectionRef,
@@ -10,70 +11,53 @@ function Moments({
   // Sample milestone data (replace with actual content)
   const milestones = [
     {
+      id: 1,
       year: 2015,
+      image: "/stuff/milestones/iedc_inception.jpeg",
       title: "IEDC Inception",
       description:
         "The Innovation and Entrepreneurship Development Centre was established to foster innovation and entrepreneurial culture among students.",
     },
     {
-      year: 2016,
-      title: "First Startup Bootcamp",
-      description:
-        "Launched our first bootcamp to guide aspiring entrepreneurs through the basics of startup development and funding.",
-    },
-    {
-      year: 2017,
-      title: "Innovation Lab Launch",
-      description:
-        "Opened a dedicated innovation lab to provide students with resources and equipment for prototype development.",
-    },
-    {
-      year: 2018,
-      title: "First Incubator Launched",
-      description:
-        "Established our first incubation center to nurture early-stage startups and provide mentorship.",
-    },
-    {
-      year: 2019,
-      title: "National Recognition",
-      description:
-        "Received national recognition for outstanding contribution to entrepreneurship development in educational institutions.",
-    },
-    {
+      id: 2,
       year: 2020,
-      title: "Virtual Hackathon Series",
+      image: "/stuff/milestones/digi_kerala.jpg",
+      title: "Launch of Women Entrepreneurship Cell (WE-Cell)",
       description:
-        "Adapted to the pandemic with successful virtual hackathons reaching participants nationwide.",
+        "A women-led initiative to empower and support aspiring women entrepreneurs at IEDC Bootcamp CEC. WE-Cell aims to provide a platform for innovation, learning, and leadership in a time when women are reshaping the entrepreneurial landscape across India.",
     },
     {
-      year: 2021,
-      title: "Industry Partnership Program",
+      id: 3,
+      year: 2020,
+      title: "FABXL 3.0",
+      image: "/stuff/milestones/fabxl.jpg",
       description:
-        "Initiated partnerships with leading industries to provide real-world problem statements and mentorship.",
+        "The most spectacular event of the year, FABXL 3.0 invites participants to embrace the era of technology by learning rapid prototyping.",
     },
     {
+      id: 4,
       year: 2022,
-      title: "Startup Success Milestone",
+      image: "/stuff/milestones/award_2022.jpg",
+      title:
+        "Award for Top Performing IEDC in South Region & Alappuzha District (IPL)",
       description:
-        "Our incubated startups collectively raised over $2 million in funding across various sectors.",
+        "Recognized as the top-performing Innovation and Entrepreneurship Development Centre in both the South Region and Alappuzha District by the Innovation Premier League (IPL).",
     },
     {
-      year: 2023,
-      title: "Global Innovation Exchange",
-      description:
-        "Established international collaborations with universities and innovation hubs worldwide.",
-    },
-    {
+      id: 5,
       year: 2024,
-      title: "Expansion Initiative",
+      image: "/stuff/milestones/exodia_24.jpg",
+      title: "Exodia 2024",
       description:
-        "Expanded facilities to accommodate growing demand, including specialized labs for emerging technologies.",
+        "An All-Kerala technical gala hosted by IEDC, featuring cutting-edge technologies like Generative AI, Augmented Reality, and Game Development, showcasing innovation and tech-driven creativity.",
     },
     {
+      id: 6,
       year: 2025,
-      title: "Celebrating A Decade of Innovation",
+      image: "/stuff/milestones/exodia_25.jpg",
+      title: "Exodia 2025",
       description:
-        "Marking 10 years of fostering innovation, with 100+ startups launched and a thriving entrepreneurial ecosystem.",
+        "A chance to explore cutting-edge domains like Cyber Security, Chatbot Mastery, and Robotics with IoT, empowering students with future-ready tech skills.",
     },
   ];
 
@@ -87,23 +71,29 @@ function Moments({
           <div className={styles.timelineLine} ref={timelineLineRef}></div>
           {milestones.map((milestone, index) => (
             <div
-              key={milestone.year}
+              key={milestone.id}
               className={styles.timelineItem}
               ref={timelineContainerRef}
             >
               <div className={styles.timelineDot}></div>
               <div className={styles.card}>
-                {milestone.year === 2025 && (
-                  <span className={styles.anniversary}>
-                    10 Year Anniversary
-                  </span>
-                )}
                 <div className={styles.year}>{milestone.year}</div>
                 <h3 className={styles.title}>{milestone.title}</h3>
                 <p className={styles.description}>{milestone.description}</p>
                 <div className={styles.cardImage}>
                   {/* Placeholder for image */}
                   {/* <img src={`/images/milestones/${milestone.year}.jpg`} alt={milestone.title} /> */}
+                  {milestone.image && (
+                    <Image
+                      src={milestone.image}
+                      alt={milestone.title}
+                      priority={index < 2} // Load first two images eagerly
+                      loading={index >= 2 ? "lazy" : "eager"}
+                      width={300}
+                      height={300}
+                      className={styles.image}
+                    />
+                  )}
                 </div>
               </div>
             </div>

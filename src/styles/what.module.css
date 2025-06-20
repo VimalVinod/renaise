@@ -76,35 +76,93 @@
   display: inline-block;
 }
 
-/* Inline icons and information styling */
-.inlineInfo {
-  display: inline-flex;
+/* Desktop Facts Row */
+.desktopFactsRow {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.desktopFact {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  font-weight: 600;
-  color: var(--text-primary);
-  padding: 0.15rem 0.4rem;
-  margin: 0 0.15rem;
-  background-color: rgba(251, 251, 223, 0.7);
-  border-radius: 4px;
-  white-space: nowrap;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+  padding: 0 1rem;
 }
 
-.inlineInfo:hover {
+.factIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
   background-color: var(--color-cream);
+  border: 2px solid var(--color-teal);
+  color: var(--color-teal);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
 }
 
-.inlineIcon {
-  font-size: 0.9rem;
-  margin-right: 0.35rem;
+.desktopFact:hover .factIconBox {
+  background-color: var(--color-teal);
+  color: white;
+  transform: scale(1.1);
+}
+
+.desktopFact p {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Mobile Facts List */
+.mobileFactsList {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.mobileFact {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  background-color: rgba(251, 251, 223, 0.5);
+  border-left: 3px solid var(--color-teal);
+  border-radius: 4px;
+}
+
+.mobileIcon {
   color: var(--color-teal);
+  font-size: 1.2rem;
+  margin-right: 1rem;
   flex-shrink: 0;
+}
+
+.mobileFact span {
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 /* Medium screens */
 @media screen and (max-width: 1024px) {
   .description {
     font-size: 1.05rem;
+  }
+  
+  .desktopFactsRow {
+    flex-wrap: wrap;
+  }
+  
+  .desktopFact {
+    flex: 1 0 30%;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -121,88 +179,6 @@
   .description {
     font-size: 1rem;
     line-height: 1.7;
-  }
-
-  .inlineInfo {
-    display: inline-flex;
-    padding: 0.1rem 0.3rem;
-    margin: 0 0.1rem;
-  }
-
-  .inlineIcon {
-    font-size: 0.8rem;
-    margin-right: 0.25rem;
-  }
-}
-
-/* Very small screens */
-@media screen and (max-width: 400px) {
-  .whatSection {
-    padding: 3rem 1rem;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-
-  .description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-}
-
-.eventCard {
-  transition: all 0.3s ease;
-}
-
-.eventCard:hover .iconWrapper {
-  background-color: var(--color-teal);
-  color: white;
-  transform: scale(1.1);
-}
-
-.cardLabel {
-  font-family: "Satoshi", sans-serif;
-  font-size: 0.9rem;
-  font-weight: normal;
-  color: var(--color-red);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-}
-
-.cardValue {
-  font-family: "Satoshi", sans-serif;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem 1.5rem;
-  text-align: center;
-  color: var(--text-primary);
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Medium screens */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .eventCards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile screens */
-@media screen and (max-width: 767px) {
-  .whatSection {
-    padding: 4rem 1.5rem;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .description {
-    font-size: 1rem;
   }
 
   .eventDetailTitle {
@@ -263,6 +239,23 @@
     font-size: 1rem;
     padding: 0.5rem 1rem 1rem;
   }
+  
+  .mobileFact {
+    padding: 0.7rem 0.7rem;
+  }
+  
+  .mobileIcon {
+    font-size: 1rem;
+    margin-right: 0.7rem;
+  }
+  
+  .mobileFact span {
+    font-size: 0.85rem;
+  }
+}
+
+.factContent h4 {
+  font-size: 0.8rem;
 }
 
 .factContent h4 {
