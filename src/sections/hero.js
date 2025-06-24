@@ -20,7 +20,7 @@ import What from "@sections/what"; // Import the What component
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function Hero({ scrollToSectionRef, startEndRef }) {
+function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
   const logoRef = useRef(null);
   const taglineRef = useRef(null);
   const heroRef = useRef(null);
@@ -76,20 +76,14 @@ function Hero({ scrollToSectionRef, startEndRef }) {
   const partnersTitleRef = useRef(null);
 
   //refs for moments section
-  const momentsSectionRef = useRef(null);
-  const timelineContainerRef = useRef([]);
-  const timeLineTitleRef = useRef(null);
-  const timelineLineRef = useRef(null);
+  const MomentsSectionRef = useRef(null);
+  const MomentsHeadingRef = useRef(null);
+  const MomentsTrackRef = useRef(null);
 
   //refs for what section
   const whatsectionRef = useRef(null);
   const whatSectionTitleRef = useRef(null);
   const whatSectionContentRef = useRef(null);
-
-  const addBoxToTimelineContainer = (ref) => {
-    if (!timelineContainerRef.current.includes(ref))
-      timelineContainerRef.current.push(ref);
-  };
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -685,43 +679,42 @@ function Hero({ scrollToSectionRef, startEndRef }) {
               "-=2"
             )
             .addLabel("momentsSection", "+=1")
-            .to(momentsSectionRef.current, {
-              y: 0,
-              duration: 3,
-              ease: "power2.out",
-            })
-
-            .to(timeLineTitleRef.current, {
-              y: "-=50vh",
-              opacity: 0.3,
-              duration: 3,
-              ease: "power2.in",
-            })
-            .call(startEndRef.current.start) // Call end function to hide footer
-            // Timeline line grows slowly throughout the entire scroll
-            .fromTo(
-              timelineLineRef.current,
-              {
-                height: "0%",
-              },
-              {
-                height: "44.5%",
-                duration: 20, // Much longer so it grows slowly across the whole timeline
-                ease: "power2.inOut",
-              },
-              "-=4"
-            )
-
-            // Animate all cards in the array together
             .to(
-              timelineContainerRef.current,
+              MomentsSectionRef.current,
               {
-                y: isMobile ? "-190vh" : "-175vh",
-                duration: 30, // Longer duration for all 10 cards
-                ease: "power2.inOut",
+                zIndex: 100,
+                duration: 0,
               },
-              "-=20"
-            );
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .call(startEndRef.current.start)
+            .to(
+              MomentsHeadingRef.current,
+              {
+                y: 0,
+                opacity: 1,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=2"
+            ) // Start this 2 seconds before the end of the previous animation
+            .to(
+              MomentsTrackRef.current,
+              {
+                y: 0,
+                opacity: 1,
+                duration: 2,
+                ease: "power2.out",
+              },
+              "-=2"
+            )
+          .to({}, { duration: 5 }) // Pause to let users read
+          .to(MomentsSectionRef.current, {
+            zIndex: -1,
+            duration: 0,
+          }) // Hide the Moments section
+            // Start track before heading finishes)
+          // Call end function to hide footer
           // Start this 2 seconds before the end of the previous animation
           // .addLabel("partnersSection", "+=5") // Add a label for the Partners section
           // .to(partnersSectionRef.current, {
@@ -821,16 +814,15 @@ function Hero({ scrollToSectionRef, startEndRef }) {
           partnerChainRef={partnerChainRef}
           partnerTitleRef={partnersTitleRef}
         /> */}
-        <Moments
-          momentsSectionRef={momentsSectionRef}
-          timelineContainerRef={addBoxToTimelineContainer}
-          timeLineTitleRef={timeLineTitleRef}
-          timelineLineRef={timelineLineRef}
-        />
         <What
           whatsectionRef={whatsectionRef}
           whatSectionTitleRef={whatSectionTitleRef}
           whatSectionContentRef={whatSectionContentRef}
+        />
+        <Moments
+          MomentsSectionRef={MomentsSectionRef}
+          MomentsHeadingRef={MomentsHeadingRef}
+          MomentsTrackRef={MomentsTrackRef}
         />
       </section>
     </>

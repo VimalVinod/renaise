@@ -7,6 +7,10 @@ import Blob from "@components/Blob";
 import Footer from "@sections/footer";
 import HowToReach from "@sections/howToReach";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 let sparkieTimeout;
 
 function spawnSparkie(x, y) {
@@ -36,6 +40,8 @@ function spawnSparkie(x, y) {
 
 export default function Home() {
   const scrollToSectionRef = React.useRef(null);
+
+  const momentsTimelineRef = React.useRef(null);
   
   const [loadFooter, setLoadFooter] = React.useState(false);
   const startEndRef = React.useRef({
