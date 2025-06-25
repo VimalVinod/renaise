@@ -181,6 +181,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
         delay: 0.2,
         onComplete: () => {
           // Re-enable scrolling
+          startEndRef.current.start();
           document.documentElement.style.overflow = "";
           document.body.style.overflow = "auto";
           // Single scroll timeline that handles all phases over 300vh
@@ -256,7 +257,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               duration: 3,
               ease: "power2.in",
             })
-            .addLabel("aboutSection", "+=7") // Add a label for the About section
+            .addLabel("aboutSection", isMobile?"+=5":"+=7") // Add a label for the About section
             .to(
               textContainerRefForAbout.current,
               {
@@ -378,7 +379,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               "-=1"
             ) // Start cards before heading finishes
 
-            .addLabel("scopeSection", "+=3")
+            .addLabel("scopeSection",isMobile?"-=5": "+=0")
             .to(
               scopeSectionRef.current,
               {
@@ -552,7 +553,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
             //   },
             //   "-=2"
             // )
-            .addLabel("sponsorSection", "+=3") // Add a label for the Sponsor section
+            .addLabel("sponsorSection",isMobile?"-=9":"-=5") // Add a label for the Sponsor section
             .to(
               sponsorSectionRef.current,
               {
@@ -661,7 +662,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               zIndex: -1,
               duration: 0,
             })
-            .call(startEndRef.current.end) // Call start function to load footer
+            //.call(startEndRef.current.end) // Call start function to load footer
             .to(whatHeadingRef.current, {
               opacity: 0.5,
               y: "-=100vh",
@@ -678,7 +679,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               },
               "-=2"
             )
-            .addLabel("momentsSection", "+=1")
+            .addLabel("momentsSection",isMobile?"-=12":"-=5")
             .to(
               MomentsSectionRef.current,
               {
@@ -687,7 +688,7 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               },
               "-=2"
             ) // Start this 2 seconds before the end of the previous animation
-            .call(startEndRef.current.start)
+            //.call(startEndRef.current.start)
             .to(
               MomentsHeadingRef.current,
               {
@@ -696,7 +697,6 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
                 duration: 2,
                 ease: "power2.out",
               },
-              "-=2"
             ) // Start this 2 seconds before the end of the previous animation
             .to(
               MomentsTrackRef.current,
@@ -708,12 +708,12 @@ function Hero({ scrollToSectionRef, startEndRef, momentsTimelineRef }) {
               },
               "-=2"
             )
-          .to({}, { duration: 5 }) // Pause to let users read
-          .to(MomentsSectionRef.current, {
-            zIndex: -1,
-            duration: 0,
-          }) // Hide the Moments section
-            // Start track before heading finishes)
+            .to({}, { duration: 5 }) // Pause to let users read
+            .to(MomentsSectionRef.current, {
+              zIndex: -1,
+              duration: 0,
+            }); // Hide the Moments section
+          // Start track before heading finishes)
           // Call end function to hide footer
           // Start this 2 seconds before the end of the previous animation
           // .addLabel("partnersSection", "+=5") // Add a label for the Partners section

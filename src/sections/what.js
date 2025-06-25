@@ -48,10 +48,10 @@ function What({ whatsectionRef, whatSectionTitleRef, whatSectionContentRef }) {
               </p>
               
               <ul className={styles.mobileFactsList}>
-                {/* <li className={styles.mobileFact}>
+                <li className={styles.mobileFact}>
                   <FaCalendarAlt className={styles.mobileIcon} />
                   <span>August 23, 2025</span>
-                </li> */}
+                </li>
                 <li className={styles.mobileFact}>
                   <FaMapMarkerAlt className={styles.mobileIcon} />
                   <span>College of Engineering Chengannur</span>
@@ -88,17 +88,17 @@ function What({ whatsectionRef, whatSectionTitleRef, whatSectionContentRef }) {
                 Entrepreneurs Meetup is a flagship one-day, student-led
                 entrepreneurial festival hosted by{" "}
                 <span className={styles.highlight}>IEDC BOOTCAMP CEC</span> 
-                {/* on 
-                August 23, 2025 at the College of Engineering Chengannur. */}
+                on 
+                August 23, 2025 at the College of Engineering Chengannur.
               </p>
               
               <div className={styles.desktopFactsRow}>
-                {/* <div className={styles.desktopFact}>
+                <div className={styles.desktopFact}>
                   <div className={styles.factIconBox}>
                     <FaCalendarAlt />
                   </div>
                   <p>August 23, 2025</p>
-                </div> */}
+                </div>
                 <div className={styles.desktopFact}>
                   <div className={styles.factIconBox}>
                     <FaMapMarkerAlt />
