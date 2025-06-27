@@ -2,7 +2,7 @@ const milestones = [
   {
     id: 1,
     year: 2015,
-    image: "/stuff/milestones/iedc_inception.jpeg",
+    image: "/stuff/milestones/iedc_inception.jpg",
     title: "IEDC Inception",
     description:
       "The Innovation and Entrepreneurship Development Centre was established to foster innovation and entrepreneurial culture among students.",
